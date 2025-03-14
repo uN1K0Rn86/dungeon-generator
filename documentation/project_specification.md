@@ -29,8 +29,8 @@ Bachelor's degree in Computer Science (Tietojenkäsittelytieteen kandidaatti TKT
 
 ## Sources
 
-[Vazgriz: Procedurally Generated Dungeons](https://vazgriz.com/119/procedurally-generated-dungeons/)
-[Wikipedia: Delauney Triangulation](https://en.wikipedia.org/wiki/Delaunay_triangulation)
-[Wikipedia: Bowyer-Watson Algorithm](https://en.wikipedia.org/wiki/Bowyer%E2%80%93Watson_algorithm)
-[Wikipedia: Prim's Algorithm](https://en.wikipedia.org/wiki/Prim%27s_algorithm)
+[Vazgriz: Procedurally Generated Dungeons](https://vazgriz.com/119/procedurally-generated-dungeons/)  
+[Wikipedia: Delauney Triangulation](https://en.wikipedia.org/wiki/Delaunay_triangulation)  
+[Wikipedia: Bowyer-Watson Algorithm](https://en.wikipedia.org/wiki/Bowyer%E2%80%93Watson_algorithm)  
+[Wikipedia: Prim's Algorithm](https://en.wikipedia.org/wiki/Prim%27s_algorithm)  
 [Wikipedia: A* Algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm)
