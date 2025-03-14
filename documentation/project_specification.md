@@ -14,6 +14,7 @@ The application will consist of several algorithms, each with a specific task.
 - A Bowyer-Watson algorithm to create a Delauney triangulation of the rooms. This will create potential connections between the rooms. A basic version of this algorithm works in O(n^2) time. By precomputing circumcircles, it is possible to implement in O(n*log(n)) time at the expense of additional memory usage, which will be the goal.
 - Prim's algorithm to create a minimum spanning tree (MST) from the triangulation. This will ensure that all rooms are connected. Additional other connections will be preserved based on the user specification. The goal will be to use binary heaps and adjacency lists, which will allow the algorithm to reach O(|E|log|V|) time (with |E| being the amount of edges and |V| the amount of rooms).
 - A* algorithm to form the actual hallways from one room to the next. The time complexity will depend on the heuristic function used.
+- An algorithm that provides a visual representation of the dungeon. This will be updated during generation. The visual representation will be simple, likely something on the command line.
 
 It is difficult to say what the core of this project will be, as all phases of dungeon generation are essential for the final product. However, perhaps the most important part will be forming the Delauney triangulation. That will form the basis for connections between rooms in the dungeon.
 
