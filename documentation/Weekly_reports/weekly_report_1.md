@@ -14,4 +14,13 @@ I have a good idea of how to proceed with the project, but i am unsure about the
 
 ## Next Steps
 
-To me it makes the most sense to start with implementing the visual representation and room placement. This way, I will have a way to see what the program actually does and I will be able to evaluate my progress. 
+To me it makes the most sense to start with implementing the visual representation and room placement. This way, I will have a way to see what the program actually does and I will be able to evaluate my progress.
+
+## Time Tracking
+
+| Date | What Was Done | Time Used |
+|------|---------------|-----------|
+| 11.3 | Familiriazing with possible topics | 1.5h |
+| 12.3 | Attending the initial lecture, choosing a topic | 2h |
+| 14.3 | Researching algorithms, project initialization | 4.5h |
+| Total | | 8h
