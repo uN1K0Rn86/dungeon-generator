@@ -87,6 +87,7 @@ class Ui:
         Prints explanations for dungeon tiles.
         """
 
+        print("Each tile in the dungeon represents either a wall or a floor.")
         print("# - Wall")
         print(". - Floor")
         print("\n")
