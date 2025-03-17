@@ -1,5 +1,4 @@
 from random import randint
-from visual_output import output
 
 def generate_room(maxwidth: int, maxheight: int):
     """
@@ -42,21 +41,19 @@ def place_rooms(width, height, room_maxwidth, room_maxheight, amount):
 
             up_left_corner = (randint(1, width - room[0] - 1), randint(1, height - room[1] - 1))
             
-            # Make sure the room does not connect to an existing room
-            for j in range(up_left_corner[0] - 1, up_left_corner[0] + room[0] + 1):
-                for k in range(up_left_corner[1] - 1, up_left_corner[1] + room[1] + 1):
+            # Make sure the room does not connect to an existing room and is not at the edge of the dungeon
+            for j in range(up_left_corner[1] - 1, up_left_corner[1] + room[1] + 1):
+                for k in range(up_left_corner[0] - 1, up_left_corner[0] + room[0] + 1):
                     if dungeon[j][k] == ".":
                         overlap = True
             tries -= 1
 
-        # I the room cannot be placed, return the dungeon as is
-        if tries <= 0:
-            return dungeon
+        # If the room cannot be placed, return the dungeon as is
+        if tries == 0:
+            return dungeon, tries
 
-        for j in range(up_left_corner[0], up_left_corner[0] + room[0]):
-            for k in range (up_left_corner[1], up_left_corner[1] + room[1]):
+        for j in range(up_left_corner[1], up_left_corner[1] + room[1]):
+            for k in range (up_left_corner[0], up_left_corner[0] + room[0]):
                 dungeon[j][k] = "."
 
-    return dungeon
-
-print(output(place_rooms(30, 30, 8, 8, 8)))
+    return dungeon, tries
