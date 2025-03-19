@@ -21,5 +21,4 @@ class TestPlaceRooms:
 
     def test_if_room_dont_fit_return_dungeon_as_is(self):
         self.dungeon, self.tries = place_rooms(5, 5, 2, 2, 5)
-        print(self.dungeon)
-        assert self.tries > 0
+        assert self.tries == 0
