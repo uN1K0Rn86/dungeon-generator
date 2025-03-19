@@ -27,6 +27,9 @@ def place_rooms(width, height, room_maxwidth, room_maxheight, amount):
         room_maxwidth (Integer): Maximum width for a single room.
         room_maxheight (Integer): Maximum height for a single room.
         amount (Integer): Amount of rooms to place.
+
+    Returns:
+        A list of lists containing the dungeon with the placed rooms and the amount of remaining tries to place the last room.
     """
 
     dungeon = [["#" for i in range(width)] for j in range(height)]
@@ -39,9 +42,10 @@ def place_rooms(width, height, room_maxwidth, room_maxheight, amount):
             overlap = False
             room = generate_room(room_maxwidth, room_maxheight)
 
+            # Randomly select the upper left corner location for the room so that it is not at the edge of the dungeon
             up_left_corner = (randint(1, width - room[0] - 1), randint(1, height - room[1] - 1))
             
-            # Make sure the room does not connect to an existing room and is not at the edge of the dungeon
+            # Make sure the room does not connect to an existing room
             for j in range(up_left_corner[1] - 1, up_left_corner[1] + room[1] + 1):
                 for k in range(up_left_corner[0] - 1, up_left_corner[0] + room[0] + 1):
                     if dungeon[j][k] == ".":
@@ -52,6 +56,7 @@ def place_rooms(width, height, room_maxwidth, room_maxheight, amount):
         if tries == 0:
             return dungeon, tries
 
+        # Place the room
         for j in range(up_left_corner[1], up_left_corner[1] + room[1]):
             for k in range (up_left_corner[0], up_left_corner[0] + room[0]):
                 dungeon[j][k] = "."

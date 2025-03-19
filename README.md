@@ -1,5 +1,7 @@
 # Dungeon Generator
 
+![CI](https://github.com/uN1K0Rn86/dungeon-generator/workflows/CI/badge.svg)
+
 ## Documentation
 
 - [Project Specification](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/project_specification.md)
