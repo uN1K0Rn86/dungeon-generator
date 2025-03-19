@@ -13,8 +13,13 @@ class TestGenerateRoom:
 class TestPlaceRooms:
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.dungeon, tries = place_rooms(40, 30, 8, 7, 9)
+        self.dungeon, self.tries = place_rooms(40, 30, 8, 7, 9)
 
     def test_dungeon_size(self):
         assert len(self.dungeon) == 30
         assert len(self.dungeon[0]) == 40
+
+    def test_if_room_dont_fit_return_dungeon_as_is(self):
+        self.dungeon, self.tries = place_rooms(5, 5, 2, 2, 5)
+        print(self.dungeon)
+        assert self.tries > 0
