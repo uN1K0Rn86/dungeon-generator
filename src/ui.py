@@ -1,6 +1,5 @@
 import sys
-from room_generator import place_rooms
-from visual_output import output
+from dungeon import Dungeon
 
 class Ui:
     """
@@ -45,25 +44,45 @@ class Ui:
             print("Dungeon width and height should be at least 2 tiles more than the maximum width and height of a room")
             print("\n")
 
-            width = int(input("Dungeon width: "))
-            if width == 0:
-                break
+            try:
+                width = int(input("Dungeon width: "))
+                if width == 0:
+                    break
+            except ValueError:
+                print("Please enter a valid integer.")
+                continue
+            
+            try:
+                height = int(input("Dungeon height: "))
+                if height == 0:
+                    break
+            except ValueError:
+                print("Please enter a valid integer.")
+                continue
 
-            height = int(input("Dungeon height: "))
-            if height == 0:
-                break
-
-            room_maxwidth = int(input("Maximum width for rooms: "))
-            if room_maxwidth == 0:
-                break
-
-            room_maxheight = int(input("Maximum height for rooms: "))
-            if room_maxheight == 0:
-                break
-
-            amount = int(input("Amount of rooms:"))
-            if amount == 0:
-                break
+            try:
+                room_maxwidth = int(input("Maximum width for rooms: "))
+                if room_maxwidth == 0:
+                    break
+            except ValueError:
+                print("Please enter a valid integer.")
+                continue
+            
+            try:
+                room_maxheight = int(input("Maximum height for rooms: "))
+                if room_maxheight == 0:
+                    break
+            except ValueError:
+                print("Please enter a valid integer.")
+                continue
+            
+            try:
+                rooms_amount = int(input("Amount of rooms:"))
+                if rooms_amount == 0:
+                    break
+            except ValueError:
+                print("Please enter a valid integer.")
+                continue
 
             if width - room_maxwidth < 2:
                 print("Please choose a wider dungeon or narrower room size")
@@ -72,13 +91,13 @@ class Ui:
                 print("Please choose a taller dungeon or lower room size")
                 continue
 
-            dungeon, tries = place_rooms(width, height, room_maxwidth, room_maxheight, amount)
+            dungeon = Dungeon(width, height, room_maxwidth, room_maxheight, rooms_amount)
+            dungeon.place_rooms()
 
-            if tries == 0:
-                print("Could not fit all the rooms into the dungeon. Please choose a bigger dungeon or less rooms")
-                print("\n")
+            if len(dungeon.rooms) < rooms_amount:
+                print("Could not fit all rooms into the dungeon.")
 
-            print(output(dungeon))
+            print(dungeon)
 
         self.menu()
 
