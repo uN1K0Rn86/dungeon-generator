@@ -10,13 +10,19 @@
 
 - I added a Github actions workflow and a coverage report.
 
+- I refactored the code into classes in order to make the Delauney triangulation application simpler.
+
+- I started work on the Bowyer-Watson algorithm by creating a data structure for triangles and a method for calculating the circumcenter of a triangle.
+
 ## What Was Unclear and / or Difficult
 
+I spent considerable time figuring out how to calculate the circumcenter of a triangle. I was planning on coming up with a method from scratch but decided instead to use the formulas on the wikipedia page, seeing as that is significantly easier to code.
 
+I would have liked to get further with coding the actual algorithm, but I had very limited time this week due to unforeseen circumstances.
 
 ## Next Steps
 
-
+Next week, I will continue work on the Bowyer-Watson algorithm. The goal is to finish the algorithm over the next week and then move on to the minimum spanning tree algorithm.
 
 ## Time Tracking
 
@@ -24,3 +30,9 @@
 |------|---------------|-----------|
 | 17.3 | Basic visual output, room generation, ui | 5h |
 | 19.3 | CI, coverage, and linter configuration | 2h |
+| 21.3 | Refactoring + started work on Bowyer-Watson | 5h |
+| Total | | 12h |
+
+## Sources
+
+- [Wikipedia: Circumcircles](https://en.wikipedia.org/wiki/Circumcircle#Circumcenter_coordinates)
