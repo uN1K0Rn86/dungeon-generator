@@ -10,3 +10,26 @@
 ## Weekly Reports
 
 - [Weekly report 1](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_1.md)
+- [Weekly report 2](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_2.md)
+
+## Installation Instructions
+
+1. Navigate to a suitable directory and clone this repository:
+```
+git clone https://github.com/uN1K0Rn86/dungeon-generator.git
+```
+
+2. Navigate to the directory containing the app:
+```
+cd dungeon-generator
+```
+
+3. Install dependencies:
+```
+poetry install
+```
+
+4. Run the application:
+```
+python3 src/index.py
+```
