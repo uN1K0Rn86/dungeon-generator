@@ -33,6 +33,17 @@ class Ui:
         elif command == "3":
             self.quit()
 
+    def validate_input(self, prompt):
+        """
+        Validates user input
+        """
+        while True:
+            try:
+                value = int(input(prompt))
+                return value
+            except ValueError:
+                print("Please enter a valid integer.")
+
     def dungeon_generator(self):
         """
         Asks for user specifications for the dungeon and prints out the resulting dungeon.
@@ -44,45 +55,26 @@ class Ui:
             print("Dungeon width and height should be at least 2 tiles more than the maximum width and height of a room")
             print("\n")
 
-            try:
-                width = int(input("Dungeon width: "))
-                if width == 0:
-                    break
-            except ValueError:
-                print("Please enter a valid integer.")
-                continue
-            
-            try:
-                height = int(input("Dungeon height: "))
-                if height == 0:
-                    break
-            except ValueError:
-                print("Please enter a valid integer.")
-                continue
+            width = self.validate_input("Dungeon width: ")
+            if width == 0:
+                break
 
-            try:
-                room_maxwidth = int(input("Maximum width for rooms: "))
-                if room_maxwidth == 0:
-                    break
-            except ValueError:
-                print("Please enter a valid integer.")
-                continue
-            
-            try:
-                room_maxheight = int(input("Maximum height for rooms: "))
-                if room_maxheight == 0:
-                    break
-            except ValueError:
-                print("Please enter a valid integer.")
-                continue
-            
-            try:
-                rooms_amount = int(input("Amount of rooms:"))
-                if rooms_amount == 0:
-                    break
-            except ValueError:
-                print("Please enter a valid integer.")
-                continue
+            height = self.validate_input("Dungeon height: ")
+            if height == 0:
+                break
+
+
+            room_maxwidth = self.validate_input("Maximum width for rooms: ")
+            if room_maxwidth == 0:
+                break
+
+            room_maxheight = self.validate_input("Maximum height for rooms: ")
+            if room_maxheight == 0:
+                break
+
+            rooms_amount = self.validate_input("Amount of rooms:")
+            if rooms_amount == 0:
+                break
 
             if width - room_maxwidth < 2:
                 print("Please choose a wider dungeon or narrower room size")

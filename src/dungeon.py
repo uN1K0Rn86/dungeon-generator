@@ -24,7 +24,7 @@ class Dungeon:
         Places the rooms into the dungeon, if they can fit
         """
 
-        for i in range(self.rooms_amount):
+        for _ in range(self.rooms_amount):
             overlap = True
             tries = 50 # Allow 50 attemps to avoid endless loops
 
@@ -51,7 +51,7 @@ class Dungeon:
             for j in range(room.corner_y, room.corner_y + room.height):
                 for k in range(room.corner_x, room.corner_x + room.width):
                     self.tiles[j][k] = "."
-            
+
             self.rooms.append(room)
 
     def __str__(self):
@@ -60,5 +60,5 @@ class Dungeon:
             for tile in row:
                 dungeon += tile
             dungeon += "\n"
-        
+
         return dungeon
