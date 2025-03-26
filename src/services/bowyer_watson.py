@@ -1,9 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+class Edge:
+    """
+    A class to represent an edge (line) between two points.
+    """
+
+    def __init__(self, p1, p2):
+        self.p1 = (p1[0], p1[1])
+        self.p2 = (p2[0], p2[1])
+
+    def __eq__(self, other):
+        return {self.p1, self.p2} == {other.p1, other.p2}
+
 class Triangle:
     """
-    A class to represent triangles consisting of 3 points
+    A class to represent triangles consisting of 3 points.
     """
 
     def __init__(self, p1, p2, p3):
@@ -89,6 +101,9 @@ class BowyerWatson:
         distance = np.sqrt(((point[0] - triangle.center[0])**2 + (point[1] - triangle.center[1])**2))
 
         return distance < triangle.radius
+    
+    def add_point(self):
+        pass
 
     def display(self):
         """
