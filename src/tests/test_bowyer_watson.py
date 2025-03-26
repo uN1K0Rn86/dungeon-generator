@@ -1,5 +1,5 @@
 import unittest
-from services.bowyer_watson import Triangle, BowyerWatson
+from services.bowyer_watson import Edge, Triangle, BowyerWatson
 from random import randint
 from math import sqrt
 
@@ -30,3 +30,12 @@ class TestBowyerWatson(unittest.TestCase):
     def test_is_in_circle(self):
         self.assertTrue(self.b.is_in_circle(self.b.points[3], self.tri))
         self.assertFalse(self.b.is_in_circle(self.b.points[4], self.tri))
+
+    def test_is_unique(self):
+        ab = Edge(self.b.points[0], self.b.points[1])
+        ba = Edge(self.b.points[1], self.b.points[0])
+        ac = Edge(self.b.points[0], self.b.points[2])
+        edges = [ab, ba, ac]
+        self.assertTrue(self.b.is_unique(edges, ac))
+        self.assertFalse(self.b.is_unique(edges, ab))
+        self.assertFalse(self.b.is_unique(edges, ba))

@@ -28,6 +28,7 @@ class Triangle:
         self.p1 = (p1[0], p1[1])
         self.p2 = (p2[0], p2[1])
         self.p3 = (p3[0], p3[1])
+        self.edges = (Edge(self.p1, self.p2), Edge(self.p2, self.p3), Edge(self.p3, self.p1))
         self.center = self.circumcenter()[0]
         self.radius = self.circumcenter()[1]
 
@@ -87,7 +88,76 @@ class BowyerWatson:
 
         self.st = Triangle(p1, p2, p3)
 
-        self.triangles = {}
+        self.triangles = [self.st]
+
+    def triangulate(self):
+        """
+        Add all the points to the triangulation and remove any triangles that share an edge
+        with the super triangle.
+        """
+
+        for point in self.points:
+            self.add_point(point)
+
+        final_triangles = []
+
+        for triangle in self.triangles:
+            not_st = True
+            for edge in triangle.edges:
+                if edge in self.st.edges:
+                    not_st = False
+            points = [triangle.p1, triangle.p2, triangle.p3]
+            st_points = [self.st.p1, self.st.p2, self.st.p3]
+            for point in points:
+                if point in st_points:
+                    not_st = False
+            if not_st:
+                final_triangles.append(triangle)
+
+        self.triangles = final_triangles
+
+    def add_point(self, point):
+        """
+        Add a point to the Delauney Triangulation.
+        """
+
+        edges = []
+        new_triangles = []
+
+        for triangle in self.triangles:
+            if self.is_in_circle(point, triangle):
+                for edge in triangle.edges:
+                    edges.append(edge)
+            else:
+                new_triangles.append(triangle)
+
+        unique_edges = []
+
+        for edge in edges:
+            if self.is_unique(edges, edge):
+                unique_edges.append(edge)
+
+        for edge in unique_edges:
+            try:
+                new_triangles.append(Triangle(edge.p1, edge.p2, point))
+            except ZeroDivisionError:
+                continue
+
+        self.triangles = new_triangles
+
+    def is_unique(self, edges, edge):
+        """
+        Determines whether an edge in a list of edges is unique.
+        
+        Args:
+            edges (list): List of Edges
+            edge (Edge): an Edge between two points
+
+        Returns:
+            Boolean (True if edge is unique)
+        """
+
+        return edges.count(edge) == 1
 
     def is_in_circle(self, point, triangle):
         """
@@ -117,12 +187,25 @@ class BowyerWatson:
         plt.figure(figsize=(6, 6))
         plt.scatter(x, y, color='blue')
         plt.plot(st_x, st_y, color='red', linewidth=2)
+
+        for triangle in self.triangles:
+            t_x = [triangle.p1[0], triangle.p2[0], triangle.p3[0], triangle.p1[0]]
+            t_y = [triangle.p1[1], triangle.p2[1], triangle.p3[1], triangle.p1[1]]
+            plt.plot(t_x, t_y, color='green', linewidth=1)
+
         plt.show()
 
 if __name__ == "__main__":
     p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0)]
 
     b = BowyerWatson(p)
+    b.triangulate()
     b.display()
     c = Triangle(p[0], p[1], p[2])
     print(b.is_in_circle(p[3], c))
+    e = Edge(b.points[0], b.points[1])
+    f = Edge(b.points[1], b.points[0])
+    g = Edge(b.points[2], b.points[1])
+    h = [e, f, g]
+    print(b.is_unique(h, e))
+    print(b.is_unique(h, g))
