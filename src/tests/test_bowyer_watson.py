@@ -1,5 +1,5 @@
 import unittest
-from services.bowyer_watson import Triangle
+from services.bowyer_watson import Triangle, BowyerWatson
 from random import randint
 from math import sqrt
 
@@ -20,3 +20,13 @@ class TestTriangle(unittest.TestCase):
         self.assertAlmostEqual(d1, d2)
         self.assertAlmostEqual(d2, d3)
         self.assertAlmostEqual(d1, r)
+
+class TestBowyerWatson(unittest.TestCase):
+    def setUp(self):
+        p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0)]
+        self.b = BowyerWatson(p)
+        self.tri = Triangle(p[0], p[1], p[2])
+
+    def test_is_in_circle(self):
+        self.assertTrue(self.b.is_in_circle(self.b.points[3], self.tri))
+        self.assertFalse(self.b.is_in_circle(self.b.points[4], self.tri))
