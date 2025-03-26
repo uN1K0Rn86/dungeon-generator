@@ -22,8 +22,8 @@ class Room:
         """
         self.corner_x = x
         self.corner_y = y
-        self.center_x = (self.corner_x + self.width) / 2
-        self.center_y = (self.corner_y + self.height) / 2
+        self.center_x = (self.corner_x * 2 + self.width) / 2
+        self.center_y = (self.corner_y * 2 + self.height) / 2
 
     def __str__(self):
         """

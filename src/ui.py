@@ -90,6 +90,7 @@ class Ui:
                 print("Could not fit all rooms into the dungeon.")
 
             print(dungeon)
+            dungeon.display()
 
         self.menu()
 

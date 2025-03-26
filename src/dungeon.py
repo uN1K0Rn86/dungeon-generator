@@ -1,5 +1,7 @@
 from random import randint
+import matplotlib.pyplot as plt
 from room import Room
+from services.bowyer_watson import BowyerWatson
 
 class Dungeon:
     """
@@ -54,6 +56,52 @@ class Dungeon:
 
             self.rooms.append(room)
 
+    def delauney(self):
+        """
+        Perform a Delauney Triangulation using the center of each room as a point.
+        """
+        room_centers = [(room.center_x, self.height - room.center_y) for room in self.rooms]
+        d = BowyerWatson(room_centers)
+
+        return d
+    
+    def display(self):
+        plt.figure(figsize=(8, 8))
+
+        borders_x = [0, self.width, self.width, 0, 0]
+        borders_y = [0, 0, self.height, self.height, 0]
+        plt.plot(borders_x, borders_y, color='black', linewidth=3)
+
+        for room in self.rooms:
+            room_x = [
+                room.corner_x,
+                room.corner_x,
+                room.corner_x + room.width,
+                room.corner_x + room.width,
+                room.corner_x
+                ]
+            room_y = [
+                self.height - room.corner_y,
+                self.height - room.corner_y - room.height,
+                self.height - room.corner_y - room.height,
+                self.height - room.corner_y,
+                self.height - room.corner_y
+                ]
+            plt.plot(room_x, room_y, color='blue', linewidth=1)
+        
+        d = self.delauney()
+        d.triangulate()
+        x = [point[0] for point in d.points]
+        y = [point[1] for point in d.points]
+        plt.scatter(x, y, color='orange')
+
+        for triangle in d.triangles:
+            t_x = [triangle.p1[0], triangle.p2[0], triangle.p3[0], triangle.p1[0]]
+            t_y = [triangle.p1[1], triangle.p2[1], triangle.p3[1], triangle.p1[1]]
+            plt.plot(t_x, t_y, color='green', linewidth=1)
+
+        plt.show()
+
     def __str__(self):
         dungeon = ""
         for row in self.tiles:
@@ -62,3 +110,8 @@ class Dungeon:
             dungeon += "\n"
 
         return dungeon
+    
+if __name__ == "__main__":
+    dung = Dungeon(50, 40, 10, 10, 8)
+    dung.place_rooms()
+    dung.display()

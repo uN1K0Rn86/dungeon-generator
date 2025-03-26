@@ -187,6 +187,7 @@ class BowyerWatson:
         """
         Create a plot displaying points, the super triangle, and the Delauney triangulation.
         """
+        
         x = [point[0] for point in self.points]
         y = [point[1] for point in self.points]
         st_x = [self.st.p1[0], self.st.p2[0], self.st.p3[0], self.st.p1[0]]
