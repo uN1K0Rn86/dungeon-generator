@@ -93,7 +93,7 @@ class BowyerWatson:
     def triangulate(self):
         """
         Add all the points to the triangulation and remove any triangles that share an edge
-        with the super triangle.
+        or vertex with the super triangle.
         """
 
         for point in self.points:
@@ -101,6 +101,7 @@ class BowyerWatson:
 
         final_triangles = []
 
+        # Find which triangles share edges or vertices with the super triangle and discard those
         for triangle in self.triangles:
             not_st = True
             for edge in triangle.edges:
@@ -124,22 +125,29 @@ class BowyerWatson:
         edges = []
         new_triangles = []
 
+        # Iterate through all triangles
         for triangle in self.triangles:
+            # If the point is in the triangle's circumcircle, the triangle is invalid
             if self.is_in_circle(point, triangle):
                 for edge in triangle.edges:
+                    # Add the edges of an invalid triangle to a list of edges used to create new triangles
                     edges.append(edge)
             else:
+                # Add valid triangles to the list of new triangles.
                 new_triangles.append(triangle)
 
         unique_edges = []
 
+        # Find which edges are unique
         for edge in edges:
             if self.is_unique(edges, edge):
                 unique_edges.append(edge)
 
+        # Use unique edges to form new triangles
         for edge in unique_edges:
             try:
                 new_triangles.append(Triangle(edge.p1, edge.p2, point))
+            # If the determinant used to calculate the circumcircle is 0, the triangle is inline and thus invalid
             except ZeroDivisionError:
                 continue
 
@@ -177,7 +185,7 @@ class BowyerWatson:
 
     def display(self):
         """
-        Create a plot displaying points and the super triangle.
+        Create a plot displaying points, the super triangle, and the Delauney triangulation.
         """
         x = [point[0] for point in self.points]
         y = [point[1] for point in self.points]
@@ -196,7 +204,7 @@ class BowyerWatson:
         plt.show()
 
 if __name__ == "__main__":
-    p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0)]
+    p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0), (8, 1), (4, 4)]
 
     b = BowyerWatson(p)
     b.triangulate()
