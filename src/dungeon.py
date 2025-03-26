@@ -64,8 +64,11 @@ class Dungeon:
         d = BowyerWatson(room_centers)
 
         return d
-    
+
     def display(self):
+        """
+        Plot the dungeon and the Delauney Triangulation of the rooms in an x y grid.
+        """
         plt.figure(figsize=(8, 8))
 
         borders_x = [0, self.width, self.width, 0, 0]
@@ -88,7 +91,7 @@ class Dungeon:
                 self.height - room.corner_y
                 ]
             plt.plot(room_x, room_y, color='blue', linewidth=1)
-        
+
         d = self.delauney()
         d.triangulate()
         x = [point[0] for point in d.points]
@@ -110,7 +113,7 @@ class Dungeon:
             dungeon += "\n"
 
         return dungeon
-    
+
 if __name__ == "__main__":
     dung = Dungeon(50, 40, 10, 10, 8)
     dung.place_rooms()
