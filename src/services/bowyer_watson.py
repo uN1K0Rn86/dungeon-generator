@@ -7,6 +7,9 @@ class Edge:
     """
 
     def __init__(self, p1, p2):
+        """
+        Constructor that initializes the points of the edge.
+        """
         self.p1 = (p1[0], p1[1])
         self.p2 = (p2[0], p2[1])
 
@@ -101,9 +104,6 @@ class BowyerWatson:
         distance = np.sqrt(((point[0] - triangle.center[0])**2 + (point[1] - triangle.center[1])**2))
 
         return distance < triangle.radius
-    
-    def add_point(self):
-        pass
 
     def display(self):
         """
