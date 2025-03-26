@@ -43,6 +43,10 @@ class BowyerWatson:
     """
 
     def __init__(self, points):
+        """
+        Constructor that initializes a super triangle containing all the given points.
+        """
+
         self.points = points
 
         # Initialize the super triangle containing all points.
@@ -68,6 +72,24 @@ class BowyerWatson:
 
         self.st = Triangle(p1, p2, p3)
 
+        self.triangles = {}
+
+    def is_in_circle(self, point, triangle):
+        """
+        Check if a point is inside the circumcircle of a triangle.
+
+        Args:
+            point (tuple): x and y coordinates of a point
+            triangle (Triangle): a triangle object containing 3 points
+
+        Returns:
+            Boolean (True if the point is inside the circumcircle of the triangle)
+        """
+
+        distance = np.sqrt(((point[0] - triangle.center[0])**2 + (point[1] - triangle.center[1])**2))
+
+        return distance < triangle.radius
+
     def display(self):
         """
         Create a plot displaying points and the super triangle.
@@ -83,7 +105,9 @@ class BowyerWatson:
         plt.show()
 
 if __name__ == "__main__":
-    points = [(1, 1), (2, 2), (3, 2), (4, 1), (3, 7), (6, 4), (5, 0)]
+    p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0)]
 
-    b = BowyerWatson(points)
+    b = BowyerWatson(p)
     b.display()
+    c = Triangle(p[0], p[1], p[2])
+    print(b.is_in_circle(p[3], c))
