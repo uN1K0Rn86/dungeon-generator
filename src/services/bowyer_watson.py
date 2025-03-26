@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 class Triangle:
     """
@@ -43,3 +44,46 @@ class BowyerWatson:
 
     def __init__(self, points):
         self.points = points
+
+        # Initialize the super triangle containing all points.
+        xmin = float('inf')
+        ymin = float('inf')
+        xmax = 0
+        ymax = 0
+        for point in self.points:
+            if point[0] < xmin:
+                xmin = point[0]
+            if point[0] > xmax:
+                xmax = point[0]
+
+            if point[1] < ymin:
+                ymin = point[1]
+            if point[1] > ymax:
+                ymax = point[1]
+
+        square_width = max(xmax - xmin, ymax - ymin)
+        p1 = (xmin - 0.5 * square_width, ymin)
+        p2 = (xmin + 1.5 * square_width, ymin)
+        p3 = (xmin + 0.5 * square_width, ymin + 2 * square_width)
+
+        self.st = Triangle(p1, p2, p3)
+
+    def display(self):
+        """
+        Create a plot displaying points and the super triangle.
+        """
+        x = [point[0] for point in self.points]
+        y = [point[1] for point in self.points]
+        st_x = [self.st.p1[0], self.st.p2[0], self.st.p3[0], self.st.p1[0]]
+        st_y = [self.st.p1[1], self.st.p2[1], self.st.p3[1], self.st.p1[1]]
+
+        plt.figure(figsize=(6, 6))
+        plt.scatter(x, y, color='blue')
+        plt.plot(st_x, st_y, color='red', linewidth=2)
+        plt.show()
+
+if __name__ == "__main__":
+    points = [(1, 1), (2, 2), (3, 2), (4, 1), (3, 7), (6, 4), (5, 0)]
+
+    b = BowyerWatson(points)
+    b.display()
