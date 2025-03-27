@@ -20,6 +20,7 @@ class Dungeon:
         self.tiles = [["#" for i in range(width)] for j in range(height)]
         self.rooms = []
         self.full = False
+        self.d = None
 
     def place_rooms(self):
         """
@@ -47,6 +48,7 @@ class Dungeon:
             # If the room does not fit after 50 attempts, return
             if tries == 0:
                 self.full = True
+                self.delaunay()
                 return
 
             # Place the room
@@ -56,14 +58,16 @@ class Dungeon:
 
             self.rooms.append(room)
 
-    def delauney(self):
+        self.delaunay()
+
+    def delaunay(self):
         """
         Perform a Delauney Triangulation using the center of each room as a point.
         """
-        room_centers = [(room.center_x, self.height - room.center_y) for room in self.rooms]
-        d = BowyerWatson(room_centers)
 
-        return d
+        room_centers = [(room.center_x, self.height - room.center_y) for room in self.rooms]
+        self.d = BowyerWatson(room_centers)
+        self.d.triangulate()
 
     def display(self):
         """
@@ -92,13 +96,11 @@ class Dungeon:
                 ]
             plt.plot(room_x, room_y, color='blue', linewidth=1)
 
-        d = self.delauney()
-        d.triangulate()
-        x = [point[0] for point in d.points]
-        y = [point[1] for point in d.points]
+        x = [point[0] for point in self.d.points]
+        y = [point[1] for point in self.d.points]
         plt.scatter(x, y, color='orange')
 
-        for triangle in d.triangles:
+        for triangle in self.d.triangles:
             t_x = [triangle.p1[0], triangle.p2[0], triangle.p3[0], triangle.p1[0]]
             t_y = [triangle.p1[1], triangle.p2[1], triangle.p3[1], triangle.p1[1]]
             plt.plot(t_x, t_y, color='green', linewidth=1)
