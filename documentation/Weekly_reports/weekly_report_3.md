@@ -28,7 +28,7 @@ Properly understanding the Bowyer-Watson algorithm took a lot of work, but going
 |------|---------------|-----------|
 | 26.3 | Delauney triangulation | 7h |
 | 27.3 | Testing, UI work, documentation, cleaning code | 6h |
-| Total | 13h |
+| Total | | 13h |
 
 ## Sources and LLM usage
 
