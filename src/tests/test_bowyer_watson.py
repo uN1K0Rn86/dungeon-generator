@@ -39,3 +39,11 @@ class TestBowyerWatson(unittest.TestCase):
         self.assertTrue(self.b.is_unique(edges, ac))
         self.assertFalse(self.b.is_unique(edges, ab))
         self.assertFalse(self.b.is_unique(edges, ba))
+
+    def test_delaunay_triangulation(self):
+        self.b.triangulate()
+        for triangle in self.b.triangles:
+            tri_points = [triangle.p1, triangle.p2, triangle.p3]
+            for point in self.b.points:
+                if point not in tri_points:
+                    self.assertFalse(self.b.is_in_circle(point, triangle))
