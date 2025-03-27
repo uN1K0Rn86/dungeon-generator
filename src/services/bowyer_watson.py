@@ -203,18 +203,3 @@ class BowyerWatson:
             plt.plot(t_x, t_y, color='green', linewidth=1)
 
         plt.show()
-
-if __name__ == "__main__":
-    p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0), (8, 1), (4, 4)]
-
-    b = BowyerWatson(p)
-    b.triangulate()
-    b.display()
-    c = Triangle(p[0], p[1], p[2])
-    print(b.is_in_circle(p[3], c))
-    e = Edge(b.points[0], b.points[1])
-    f = Edge(b.points[1], b.points[0])
-    g = Edge(b.points[2], b.points[1])
-    h = [e, f, g]
-    print(b.is_unique(h, e))
-    print(b.is_unique(h, g))

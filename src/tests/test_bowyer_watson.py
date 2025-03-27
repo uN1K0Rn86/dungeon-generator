@@ -1,7 +1,9 @@
 import unittest
-from services.bowyer_watson import Edge, Triangle, BowyerWatson
+from unittest.mock import patch
 from random import randint
 from math import sqrt
+import matplotlib.pyplot
+from services.bowyer_watson import Edge, Triangle, BowyerWatson
 
 class TestTriangle(unittest.TestCase):
     def setUp(self):
@@ -47,3 +49,10 @@ class TestBowyerWatson(unittest.TestCase):
             for point in self.b.points:
                 if point not in tri_points:
                     self.assertFalse(self.b.is_in_circle(point, triangle))
+    
+    @patch("matplotlib.pyplot.show")
+    def test_display(self, mock_show):
+        self.b.triangulate()
+        self.b.display()
+
+        mock_show.assert_called_once()
