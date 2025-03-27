@@ -6,6 +6,12 @@ class Ui:
     Class for implementing the user interface.
     """
 
+    def __init__(self):
+        """
+        Constructor that initializes a list of created dungeons.
+        """
+        self.dungeons = []
+
     def run(self):
         """
         The method used to start the dungeon generator.
@@ -22,7 +28,8 @@ class Ui:
         print("Choose from the following:")
         print("1: Generate Dungeon")
         print("2: Legend")
-        print("3: Exit")
+        print("3: View Dungeons")
+        print("4: Exit")
         command = input("Command: ")
         print("\n")
 
@@ -31,6 +38,8 @@ class Ui:
         elif command == "2":
             self.legend()
         elif command == "3":
+            self.view_dungeon()
+        elif command == "4":
             self.quit()
 
     def validate_input(self, prompt):
@@ -76,6 +85,8 @@ class Ui:
             if rooms_amount == 0:
                 break
 
+            name = input("Name: ")
+
             if width - room_maxwidth < 2:
                 print("Please choose a wider dungeon or narrower room size")
                 continue
@@ -83,15 +94,48 @@ class Ui:
                 print("Please choose a taller dungeon or lower room size")
                 continue
 
-            dungeon = Dungeon(width, height, room_maxwidth, room_maxheight, rooms_amount)
+            dungeon = Dungeon(width, height, room_maxwidth, room_maxheight, rooms_amount, name)
             dungeon.place_rooms()
+            self.dungeons.append(dungeon)
 
             if len(dungeon.rooms) < rooms_amount:
                 print("Could not fit all rooms into the dungeon.")
 
-            print(dungeon)
-            dungeon.display()
+            ascii_print = input("Would you like an ascii printout of the dungeon? (y/n) ")
+            if ascii_print == "y":
+                print(dungeon)
+            plot = input("Type 'enhance' if you would like a graphical plot of the dungeon with a Delaunay triangulation: ")
+            if plot == "enhance":
+                dungeon.display()
 
+        self.menu()
+
+    def view_dungeon(self):
+        """
+        View a previously generated dungeon based on its name.
+        """
+
+        while True:
+            print("Return to main menu with the command '0'")
+            print("\n")
+
+            name = input("Dungeon name: ")
+            names = {dungeon.name: i for i, dungeon in enumerate(self.dungeons)}
+
+            if name == "0":
+                break
+
+            if name in names:
+                dungeon = self.dungeons[names[name]]
+                view = input("What type of view would you like? (ascii (a) / enhanced (enhance)) ")
+                if view == "a":
+                    print(dungeon)
+                elif view == "enhance":
+                    dungeon.display()
+                else:
+                    print("Invalid command. Please try again")
+            else:
+                print("Could not find a dungeon by that name")
         self.menu()
 
     def legend(self):

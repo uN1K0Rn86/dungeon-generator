@@ -8,7 +8,7 @@ class Dungeon:
     The class dungeon models the dungeon created by the algorithms.
     """
 
-    def __init__(self, width, height, room_maxwidth, room_maxheight, rooms_amount):
+    def __init__(self, width, height, room_maxwidth, room_maxheight, rooms_amount, name=""):
         """
         The constructor, which sets initial properties for the dungeon
         """
@@ -21,6 +21,7 @@ class Dungeon:
         self.rooms = []
         self.full = False
         self.d = None
+        self.name = name
 
     def place_rooms(self):
         """
