@@ -116,8 +116,3 @@ class Dungeon:
             dungeon += "\n"
 
         return dungeon
-
-if __name__ == "__main__":
-    dung = Dungeon(50, 40, 10, 10, 8)
-    dung.place_rooms()
-    dung.display()

@@ -28,11 +28,17 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 - All_rooms_are_placed: this test makes sure that the correct number of rooms (as specified by the user) is placed when the dungeon is big enough to fit them all.
 
+- If_rooms_cant_all_be_placed_return: this test makes sure that the method for placing rooms into a dungeon returns without causing an exception if the desired number of rooms does not fit into the dungeon.
+
 - Visual_output: this tests the method that converts the dungeon from a matrix to a string.
+
+- Display: this test works the same way as the display test for the bowyer-watson class. It calls the display method and makes sure that plt.show() is called at the end.
 
 ### Class Room
 
 - Room_size_within_limits: this test makes sure that the generated room size is within the limits specified by the user.
+
+- Visual_output: this tests the method that converts the room into a string and makes sure the width and height of the room are correct in the visual output.
 
 ## UI Testing
 
