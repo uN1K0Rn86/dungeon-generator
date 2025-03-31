@@ -115,6 +115,10 @@ class Ui:
         View a previously generated dungeon based on its name.
         """
 
+        if len(self.dungeons) == 0:
+            print("No dungoens to view. Please create a dungeon first.\n")
+            self.menu()
+
         while True:
             print("Return to main menu with the command '0'")
             print("\n")

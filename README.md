@@ -6,6 +6,7 @@
 ## Documentation
 
 - [Project Specification](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/project_specification.md)
+- [Testing Document](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/testing_document.md)
 
 ## Weekly Reports
 
