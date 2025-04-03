@@ -2,7 +2,6 @@ import unittest
 from unittest.mock import patch
 from random import randint
 from math import sqrt
-import matplotlib.pyplot
 from services.bowyer_watson import Edge, Triangle, BowyerWatson
 
 class TestTriangle(unittest.TestCase):

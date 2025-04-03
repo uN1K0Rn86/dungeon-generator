@@ -46,10 +46,13 @@ class Prim:
 
         # Loop over vertices that are not yet included in the mst.
         while self.vertices:
+            # Add the vertex to the MST and remove it from the set of vertices still to be added
             self.mst.vertices.add(vertex)
             self.vertices.discard(vertex)
+
             distance = float('inf')
 
+            # Add connections to neighbouring vertices to possible edges for MST
             for connection in self.graph[vertex]:
                 if connection not in self.mst.vertices:
                     edge = Edge(vertex, connection)
@@ -57,6 +60,8 @@ class Prim:
 
             next_v = None
             next_e = None
+
+            # Loop over possible connections and determine the shortest
             for edge in self.mst.outgoing:
                 weight = np.sqrt((edge.p1[0]-edge.p2[0])**2 + (edge.p1[1]-edge.p2[1])**2)
                 if weight < distance:
@@ -64,6 +69,7 @@ class Prim:
                     next_v = edge.p1 if edge.p1 not in self.mst.vertices else edge.p2
                     next_e = edge
 
+            # Remove edges that connect back into the MST from possible connections
             for connection in self.graph[next_v]:
                 if connection in self.mst.vertices:
                     edge = Edge(next_v, connection)
