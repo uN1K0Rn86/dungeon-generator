@@ -22,6 +22,7 @@ class Dungeon:
         self.rooms = []
         self.full = False
         self.d = None
+        self.mst = None
         self.name = name
 
     def place_rooms(self):
@@ -76,11 +77,10 @@ class Dungeon:
         Use Prim's algorithm to find a minimum spanning tree of a Delaunay triangulation.
         """
 
-        prim = Prim(self.d.triangles)
-        prim.form_mst()
-        return prim
+        self.mst = Prim(self.d.triangles)
+        self.mst.form_mst()
 
-    def display(self):
+    def display(self, mode):
         """
         Plot the dungeon and the Delauney Triangulation of the rooms in an x y grid.
         """
@@ -111,10 +111,16 @@ class Dungeon:
         y = [point[1] for point in self.d.points]
         plt.scatter(x, y, color='orange')
 
-        for triangle in self.d.triangles:
-            t_x = [triangle.p1[0], triangle.p2[0], triangle.p3[0], triangle.p1[0]]
-            t_y = [triangle.p1[1], triangle.p2[1], triangle.p3[1], triangle.p1[1]]
-            plt.plot(t_x, t_y, color='green', linewidth=1)
+        if mode == "delaunay":
+            for triangle in self.d.triangles:
+                t_x = [triangle.p1[0], triangle.p2[0], triangle.p3[0], triangle.p1[0]]
+                t_y = [triangle.p1[1], triangle.p2[1], triangle.p3[1], triangle.p1[1]]
+                plt.plot(t_x, t_y, color='green', linewidth=1)
+        elif mode == "prim":
+            for edge in self.mst.mst.edges:
+                e_x = [edge.p1[0], edge.p2[0]]
+                e_y = [edge.p1[1], edge.p2[1]]
+                plt.plot(e_x, e_y, color='green', linewidth=1)
 
         plt.show()
 
@@ -130,6 +136,6 @@ class Dungeon:
 if __name__ == "__main__":
     d = Dungeon(90, 80, 22, 21, 15, "Castle")
     d.place_rooms()
-    d.display()
-    prom = d.prim()
-    prom.display()
+    d.display("delaunay")
+    d.prim()
+    d.display("prim")

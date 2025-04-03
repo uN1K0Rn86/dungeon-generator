@@ -104,9 +104,15 @@ class Ui:
             ascii_print = input("Would you like an ascii printout of the dungeon? (y/n) ")
             if ascii_print == "y":
                 print(dungeon)
+
             plot = input("Type 'enhance' if you would like a graphical plot of the dungeon with a Delaunay triangulation: ")
             if plot == "enhance":
-                dungeon.display()
+                dungeon.display("delaunay")
+
+            dungeon.prim()
+            prim = input("Would you like a minimum spanning tree of the Delaunay triangulation? (y/n) ")
+            if prim == "y":
+                dungeon.display("prim")
 
         self.menu()
 
@@ -116,8 +122,12 @@ class Ui:
         """
 
         if len(self.dungeons) == 0:
-            print("No dungoens to view. Please create a dungeon first.\n")
+            print("No dungeons to view. Please create a dungeon first.\n")
             self.menu()
+        else:
+            for dungeon in self.dungeons:
+                print("Created dungeons:")
+                print(dungeon.name)
 
         while True:
             print("Return to main menu with the command '0'")
@@ -131,11 +141,13 @@ class Ui:
 
             if name in names:
                 dungeon = self.dungeons[names[name]]
-                view = input("What type of view would you like? (ascii (a) / enhanced (enhance)) ")
+                view = input("What type of view would you like? (ascii (a) / enhanced (enhance)) / MST (MST): ")
                 if view == "a":
                     print(dungeon)
                 elif view == "enhance":
-                    dungeon.display()
+                    dungeon.display("delaunay")
+                elif view == "MST":
+                    dungeon.display("prim")
                 else:
                     print("Invalid command. Please try again")
             else:
