@@ -22,6 +22,12 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 - Display: this test calls the display() -method and makes sure that matplotlib.pyplot.show is called once at the end of it, thus making sure that the display method gives no errors.
 
+### Class Prim
+
+- MST_has_correct_number_of_edges: this test verifies that the number of edges in the MST produced by Prim's algorithm is one less than the number of vertices.
+
+- Display: this test calls the display() -method and makes sure that matplotlib.pyplot.show is called once at the end of it, thus making sure that the display method gives no errors.
+
 ### Class Dungeon
 
 - Size_is_correct: this test makes sure the created dungeon has the length and width it is supposed to.
