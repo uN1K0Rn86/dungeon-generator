@@ -2,6 +2,7 @@ from random import randint
 import matplotlib.pyplot as plt
 from room import Room
 from services.bowyer_watson import BowyerWatson
+from services.prim import Prim
 
 class Dungeon:
     """
@@ -63,12 +64,21 @@ class Dungeon:
 
     def delaunay(self):
         """
-        Perform a Delauney Triangulation using the center of each room as a point.
+        Perform a Delaunay Triangulation using the center of each room as a point.
         """
 
         room_centers = [(room.center_x, self.height - room.center_y) for room in self.rooms]
         self.d = BowyerWatson(room_centers)
         self.d.triangulate()
+
+    def prim(self):
+        """
+        Use Prim's algorithm to find a minimum spanning tree of a Delaunay triangulation.
+        """
+
+        prim = Prim(self.d.triangles)
+        prim.form_mst()
+        return prim
 
     def display(self):
         """
@@ -116,3 +126,10 @@ class Dungeon:
             dungeon += "\n"
 
         return dungeon
+
+if __name__ == "__main__":
+    d = Dungeon(90, 80, 22, 21, 15, "Castle")
+    d.place_rooms()
+    d.display()
+    prim = d.prim()
+    prim.display()
