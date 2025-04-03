@@ -131,5 +131,5 @@ if __name__ == "__main__":
     d = Dungeon(90, 80, 22, 21, 15, "Castle")
     d.place_rooms()
     d.display()
-    prim = d.prim()
-    prim.display()
+    prom = d.prim()
+    prom.display()

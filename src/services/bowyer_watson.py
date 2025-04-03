@@ -15,7 +15,7 @@ class Edge:
 
     def __eq__(self, other):
         return {self.p1, self.p2} == {other.p1, other.p2}
-    
+
     def __hash__(self):
         return hash(frozenset([self.p1, self.p2]))
 
