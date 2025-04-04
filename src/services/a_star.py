@@ -37,8 +37,8 @@ class AStar:
         Run the algorithm and convert hallway tiles to floors.
         """
         for edge in self.edges:
-            start = (round(edge.p1[0]) - 1, self.dungeon.height - round(edge.p1[1]) - 1)
-            goal = (round(edge.p2[0]) - 1, self.dungeon.height - round(edge.p2[1]) - 1)
+            start = (round(edge.p1[0]), self.dungeon.height - round(edge.p1[1]))
+            goal = (round(edge.p2[0]), self.dungeon.height - round(edge.p2[1]))
 
             path = self.find_path(start, goal)
 
