@@ -21,6 +21,7 @@ class Dungeon:
         self.rooms_amount = rooms_amount
         self.tiles = [["#" for i in range(width)] for j in range(height)]
         self.rooms = []
+        self.hallways = []
         self.full = False
         self.d = None
         self.mst = None
@@ -88,7 +89,7 @@ class Dungeon:
 
         AStar(self).run()
 
-    def display(self, mode):
+    def display(self, mode=None):
         """
         Plot the dungeon and the Delauney Triangulation / MST of the rooms in an x-y grid.
         """
@@ -129,6 +130,9 @@ class Dungeon:
                 e_x = [edge.p1[0], edge.p2[0]]
                 e_y = [edge.p1[1], edge.p2[1]]
                 plt.plot(e_x, e_y, color='green', linewidth=1)
+        else:
+            for tile in self.hallways:
+                plt.scatter(tile[0], self.height - tile[1], color='brown', marker='s', s=50)
 
         plt.show()
 
@@ -145,9 +149,10 @@ class Dungeon:
         return dungeon
 
 if __name__ == "__main__":
-    d = Dungeon(40, 30, 10, 10, 10, "Castle")
+    d = Dungeon(40, 40, 10, 10, 10, "Castle")
     d.place_rooms()
     d.prim()
     d.display("prim")
     d.a_star()
     print(d)
+    d.display()

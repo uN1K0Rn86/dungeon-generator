@@ -43,6 +43,8 @@ class AStar:
             path = self.find_path(start, goal)
 
             for tile in path:
+                if self.dungeon.tiles[tile[1]][tile[0]] != ".":
+                    self.dungeon.hallways.append(tile)
                 self.dungeon.tiles[tile[1]][tile[0]] = "."
 
     def heuristic(self, current, goal):
