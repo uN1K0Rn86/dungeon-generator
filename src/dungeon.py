@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from room import Room
 from services.bowyer_watson import BowyerWatson
 from services.prim import Prim
+from services.a_star import AStar
 
 class Dungeon:
     """
@@ -80,6 +81,13 @@ class Dungeon:
         self.mst = Prim(self.d.triangles)
         self.mst.form_mst()
 
+    def a_star(self):
+        """
+        Use the A* algorithm to form paths between rooms.
+        """
+
+        AStar(self).run()
+
     def display(self, mode):
         """
         Plot the dungeon and the Delauney Triangulation / MST of the rooms in an x-y grid.
@@ -137,8 +145,9 @@ class Dungeon:
         return dungeon
 
 if __name__ == "__main__":
-    d = Dungeon(90, 80, 22, 21, 15, "Castle")
+    d = Dungeon(40, 30, 10, 10, 10, "Castle")
     d.place_rooms()
-    d.display("delaunay")
     d.prim()
     d.display("prim")
+    d.a_star()
+    print(d)

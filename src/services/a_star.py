@@ -32,13 +32,26 @@ class AStar:
         self.dungeon = dungeon
         self.edges = dungeon.mst.mst.edges
 
+    def run(self):
+        """
+        Run the algorithm and convert hallway tiles to floors.
+        """
+        for edge in self.edges:
+            start = (round(edge.p1[0]) - 1, self.dungeon.height - round(edge.p1[1]) - 1)
+            goal = (round(edge.p2[0]) - 1, self.dungeon.height - round(edge.p2[1]) - 1)
+
+            path = self.find_path(start, goal)
+
+            for tile in path:
+                self.dungeon.tiles[tile[1]][tile[0]] = "."
+
     def heuristic(self, current, goal):
         """
         Gives an estimate of the length of the path to the goal.
         """
 
         return abs(current[0] - goal[0]) + abs(current[1] + goal[1])
-    
+
     def reconstruct_path(self, node):
         """
         Reconstructs the path from a node to the start node.
@@ -91,23 +104,24 @@ class AStar:
         start_node = Node(start, 0, self.heuristic(start, goal), None)
 
         open_list = [start_node]
+        open_coords = {start}
         closed = set()
 
         while open_list:
             current = heapq.heappop(open_list)
+            open_coords.remove(current.coordinates)
 
             if current.coordinates == goal:
                 return self.reconstruct_path(current)
-            
+
             closed.add(current.coordinates)
 
             neighbors = self.neighbors(current)
             for neighbor in neighbors:
-                if neighbor in closed:
+                if neighbor in closed or neighbor in open_coords:
                     continue
 
-                if neighbor not in open_list:
-                    heapq.heappush(open_list, Node(neighbor, current.g, current.h, current))
+                heapq.heappush(open_list, Node(neighbor, current.g + 1, self.heuristic(neighbor, goal), current))
+                open_coords.add(neighbor)
 
         return None
-                
