@@ -45,6 +45,11 @@ class Ui:
     def validate_input(self, prompt):
         """
         Validates user input
+
+        Args:
+            prompt (text): User in put to be validated.
+        Returns:
+            value (integer): The input converted to an integer, assuming that is possible. 
         """
         while True:
             try:
