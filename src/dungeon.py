@@ -82,7 +82,7 @@ class Dungeon:
 
     def display(self, mode):
         """
-        Plot the dungeon and the Delauney Triangulation of the rooms in an x y grid.
+        Plot the dungeon and the Delauney Triangulation / MST of the rooms in an x-y grid.
         """
         plt.figure(figsize=(8, 8))
 
@@ -125,6 +125,9 @@ class Dungeon:
         plt.show()
 
     def __str__(self):
+        """
+        Method for visual representation.
+        """
         dungeon = ""
         for row in self.tiles:
             for tile in row:
