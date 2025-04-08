@@ -7,12 +7,14 @@
 
 - [Project Specification](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/project_specification.md)
 - [Testing Document](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/testing_document.md)
+- [Implementation Document](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/implementation_document.md)
 
 ## Weekly Reports
 
 - [Weekly report 1](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_1.md)
 - [Weekly report 2](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_2.md)
 - [Weekly report 3](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_3.md)
+- [Weekly report 4](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_4.md)
 
 ## Installation Instructions
 
