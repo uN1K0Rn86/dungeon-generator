@@ -24,7 +24,9 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 ### Class Prim
 
-- MST_has_correct_number_of_edges: this test verifies that the number of edges in the MST produced by Prim's algorithm is one less than the number of vertices.
+- MST_has_correct_number_of_edges: this test verifies that the number of edges in the MST produced by Prim's algorithm is one less than the number of vertices.-
+
+- All_vertices_are_used: this test makes sure that the MST contains every vertex included in the input triangles by creating a set of those vertices from the triangles and comparing it with the set of vertices included in the MST.
 
 - Display: this test calls the display() -method and makes sure that matplotlib.pyplot.show is called once at the end of it, thus making sure that the display method gives no errors.
 

@@ -13,6 +13,14 @@ class TestPrim(unittest.TestCase):
         vertices = len(self.dungeon.paths.mst.vertices)
         self.assertEqual(edges, vertices - 1)
 
+    def test_all_vertices_are_used(self):
+        vertices = set()
+        for triangle in self.dungeon.d.triangles:
+            vertices.add(triangle.p1)
+            vertices.add(triangle.p2)
+            vertices.add(triangle.p3)
+        self.assertEqual(vertices, self.dungeon.paths.mst.vertices)
+
     @patch("matplotlib.pyplot.show")
     def test_display(self, mock_show):
         self.dungeon.paths.display()

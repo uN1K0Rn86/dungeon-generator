@@ -152,6 +152,7 @@ if __name__ == "__main__":
     d = Dungeon(40, 40, 10, 10, 10, "Castle")
     d.place_rooms()
     d.prim()
+    d.display("delaunay")
     d.display("prim")
     d.a_star()
     print(d)
