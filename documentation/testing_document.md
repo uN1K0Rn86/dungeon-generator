@@ -28,6 +28,8 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 - All_vertices_are_used: this test makes sure that the MST contains every vertex included in the input triangles by creating a set of those vertices from the triangles and comparing it with the set of vertices included in the MST.
 
+- Graph_is_connected: this test makes sure that every vertex is accessible from every other vertex in the MST by performind a depth first search from every vertex and comparing the result to the set of all vertices in the MST.
+
 - Display: this test calls the display() -method and makes sure that matplotlib.pyplot.show is called once at the end of it, thus making sure that the display method gives no errors.
 
 ### Class Dungeon

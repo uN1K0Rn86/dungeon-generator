@@ -69,7 +69,7 @@ class Prim:
                     next_v = edge.p1 if edge.p1 not in self.mst.vertices else edge.p2
                     next_e = edge
 
-            # Remove edges that connect back into the MST from possible connections
+            # Remove edges that connect back into the MST from the next vertex
             for connection in self.graph[next_v]:
                 if connection in self.mst.vertices:
                     edge = Edge(next_v, connection)
