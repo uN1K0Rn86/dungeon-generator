@@ -24,7 +24,7 @@ class Dungeon:
         self.hallways = []
         self.full = False
         self.d = None
-        self.mst = None
+        self.paths = None
         self.name = name
 
     def place_rooms(self):
@@ -79,8 +79,8 @@ class Dungeon:
         Use Prim's algorithm to find a minimum spanning tree of a Delaunay triangulation.
         """
 
-        self.mst = Prim(self.d.triangles)
-        self.mst.form_mst()
+        self.paths = Prim(self.d.triangles)
+        self.paths.form_mst()
 
     def a_star(self):
         """
@@ -126,7 +126,7 @@ class Dungeon:
                 t_y = [triangle.p1[1], triangle.p2[1], triangle.p3[1], triangle.p1[1]]
                 plt.plot(t_x, t_y, color='green', linewidth=1)
         elif mode == "prim":
-            for edge in self.mst.mst.edges:
+            for edge in self.paths.mst.edges:
                 e_x = [edge.p1[0], edge.p2[0]]
                 e_y = [edge.p1[1], edge.p2[1]]
                 plt.plot(e_x, e_y, color='green', linewidth=1)

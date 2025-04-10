@@ -30,7 +30,7 @@ class AStar:
         A constructor that initializes a list of tiles and a list of edges.
         """
         self.dungeon = dungeon
-        self.edges = dungeon.mst.mst.edges
+        self.edges = dungeon.paths.mst.edges
 
     def run(self):
         """
