@@ -1,5 +1,7 @@
 import unittest
 from unittest.mock import patch
+import networkx as nx
+import numpy as np
 from dungeon import Dungeon
 
 class TestPrim(unittest.TestCase):
@@ -45,6 +47,24 @@ class TestPrim(unittest.TestCase):
             visited = set()
             visit(vertex, visited, graph)
             self.assertEqual(visited, self.dungeon.paths.mst.vertices)
+
+    def test_is_minimum_spanning_tree(self):
+        prim_weight = 0
+        for edge in self.dungeon.paths.mst.edges:
+            weight = np.sqrt((edge.p1[0]-edge.p2[0])**2 + (edge.p1[1]-edge.p2[1])**2)
+            prim_weight += weight
+
+        graph = nx.Graph()
+        edges = []
+        for triangle in self.dungeon.d.triangles:
+            for edge in triangle.edges:
+                weight = np.sqrt((edge.p1[0]-edge.p2[0])**2 + (edge.p1[1]-edge.p2[1])**2)
+                edges.append((edge.p1, edge.p2, weight))
+        graph.add_weighted_edges_from(edges)
+        nx_mst = nx.minimum_spanning_tree(graph)
+        nx_weight = nx_mst.size(weight='weight')
+
+        self.assertAlmostEqual(prim_weight, nx_weight)
 
     @patch("matplotlib.pyplot.show")
     def test_display(self, mock_show):

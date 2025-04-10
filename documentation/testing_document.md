@@ -30,6 +30,8 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 - Graph_is_connected: this test makes sure that every vertex is accessible from every other vertex in the MST by performind a depth first search from every vertex and comparing the result to the set of all vertices in the MST.
 
+- Is_minimum_spanning_tree: this test compares the weight of the MST calculated by Prim's algorithm to that calculated by a known implementation of an MST algorithm from the networkx library.
+
 - Display: this test calls the display() -method and makes sure that matplotlib.pyplot.show is called once at the end of it, thus making sure that the display method gives no errors.
 
 ### Class Dungeon
