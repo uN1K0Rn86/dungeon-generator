@@ -106,16 +106,16 @@ class Ui:
             if len(dungeon.rooms) < rooms_amount:
                 print("Could not fit all rooms into the dungeon.")
 
-            ascii_print = input("Would you like an ascii printout of the dungeon? (y/n) ")
+            ascii_print = input("Would you like an ascii printout of the dungeon? (y/n): ")
             if ascii_print == "y":
                 print(dungeon)
 
-            plot = input("Type 'enhance' if you would like a graphical plot of the dungeon with a Delaunay triangulation: ")
-            if plot == "enhance":
+            plot = input("Would you like a graphical plot of the dungeon with a Delaunay triangulation? (y/n): ")
+            if plot == "y":
                 dungeon.display("delaunay")
 
             dungeon.prim()
-            prim = input("Would you like a minimum spanning tree of the Delaunay triangulation? (y/n) ")
+            prim = input("Would you like a minimum spanning tree of the Delaunay triangulation? (y/n): ")
             if prim == "y":
                 dungeon.display("prim")
 
@@ -146,10 +146,10 @@ class Ui:
 
             if name in names:
                 dungeon = self.dungeons[names[name]]
-                view = input("What type of view would you like? (ascii (a) / enhanced (enhance)) / MST (MST): ")
+                view = input("What type of view would you like? (ascii (a) / Delaunay Triangulation (d) / MST (MST): ")
                 if view == "a":
                     print(dungeon)
-                elif view == "enhance":
+                elif view == "d":
                     dungeon.display("delaunay")
                 elif view == "MST":
                     dungeon.display("prim")

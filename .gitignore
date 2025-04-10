@@ -1,6 +1,7 @@
 .coverage
 coverage.xml
 *.tmp
+vertais.md
 
 **/__pycache__/
 .pytest_cache/
