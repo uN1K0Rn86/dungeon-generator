@@ -1,5 +1,6 @@
 from random import randint
 import matplotlib.pyplot as plt
+from matplotlib import patches
 from room import Room
 from services.bowyer_watson import BowyerWatson
 from services.prim import Prim
@@ -93,13 +94,14 @@ class Dungeon:
         """
         Plot the dungeon and the Delauney Triangulation / MST of the rooms in an x-y grid.
         """
-        plt.figure(figsize=(8, 8))
+        plt.figure(figsize=(10, 8))
 
         borders_x = [0, self.width, self.width, 0, 0]
         borders_y = [0, 0, self.height, self.height, 0]
         plt.plot(borders_x, borders_y, color='black', linewidth=3)
 
-        for room in self.rooms:
+        for idx, room in enumerate(self.rooms):
+            label = 'Room' if idx == 0 else None
             room_x = [
                 room.corner_x,
                 room.corner_x,
@@ -114,26 +116,41 @@ class Dungeon:
                 self.height - room.corner_y,
                 self.height - room.corner_y
                 ]
-            plt.plot(room_x, room_y, color='blue', linewidth=1)
+            plt.plot(room_x, room_y, color='blue', linewidth=1, label=label)
 
         x = [point[0] for point in self.d.points]
         y = [point[1] for point in self.d.points]
-        plt.scatter(x, y, color='orange')
+        plt.scatter(x, y, color='orange', label='Room Center')
 
         if mode == "delaunay":
-            for triangle in self.d.triangles:
+            for idx, triangle in enumerate(self.d.triangles):
+                label = 'Delaunay Triangulation' if idx == 0 else None
                 t_x = [triangle.p1[0], triangle.p2[0], triangle.p3[0], triangle.p1[0]]
                 t_y = [triangle.p1[1], triangle.p2[1], triangle.p3[1], triangle.p1[1]]
-                plt.plot(t_x, t_y, color='green', linewidth=1)
+                plt.plot(t_x, t_y, color='green', linewidth=1, label=label)
+                plt.title("Delaunay Triangulation")
         elif mode == "prim":
-            for edge in self.paths.mst.edges:
+            for idx, edge in enumerate(self.paths.mst.edges):
+                label = 'MST' if idx == 0 else None
                 e_x = [edge.p1[0], edge.p2[0]]
                 e_y = [edge.p1[1], edge.p2[1]]
-                plt.plot(e_x, e_y, color='green', linewidth=1)
+                plt.plot(e_x, e_y, color='green', linewidth=1, label=label)
+                plt.title("Minimum Spanning Tree")
         else:
-            for tile in self.hallways:
-                plt.scatter(tile[0], self.height - tile[1], color='brown', marker='s', s=50)
+            for idx, tile in enumerate(self.hallways):
+                label = 'Hallway' if idx == 0 else None
+                rect = patches.Rectangle(
+                    (tile[0], self.height - tile[1] - 1),
+                    1, 1,
+                    facecolor='brown',
+                    edgecolor='brown',
+                    label=label
+                )
+                plt.gca().add_patch(rect)
+                plt.title("Dungeon with Hallways")
 
+        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.tight_layout()
         plt.show()
 
     def __str__(self):
