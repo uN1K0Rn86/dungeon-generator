@@ -34,6 +34,12 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 - Display: this test calls the display() -method and makes sure that matplotlib.pyplot.show is called once at the end of it, thus making sure that the display method gives no errors.
 
+### Class AStar
+
+- A_Star_finds_path: this test chooses two rooms out of the dungeon and uses the A* algorithm to form a path between them. It then verifies that the starting and ending points match those of the path given by the algorithm.
+
+- Path_is_optimal: this test also forms a path between two rooms in the dungeon using A*. It then compares the length of the path (in tiles) to the Manhattan distance (+1) between the starting and ending point. The +1 is because the Manhattan distance equals the amount of steps taken, not the amount of tiles. This works because the algorithm always finds a direct route.
+
 ### Class Dungeon
 
 - Size_is_correct: this test makes sure the created dungeon has the length and width it is supposed to.
