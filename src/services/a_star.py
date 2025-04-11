@@ -52,7 +52,7 @@ class AStar:
         Gives an estimate of the length of the path to the goal.
         """
 
-        return abs(current[0] - goal[0]) + abs(current[1] + goal[1])
+        return abs(current[0] - goal[0]) + abs(current[1] - goal[1])
 
     def reconstruct_path(self, node):
         """
