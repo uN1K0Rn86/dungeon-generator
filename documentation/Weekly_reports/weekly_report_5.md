@@ -32,6 +32,7 @@ Additionally, I had some difficulties with plotting hallways in matplotlib.
 |------|---------------|-----------|
 | 10.4 | Writing tests | 2h |
 | 11.4 | Tests, UI changes, bug fixes, brainstorming | 4h |
+| Total | | 6h |
 
 ## Sources and LLM usage
 
