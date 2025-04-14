@@ -42,7 +42,8 @@ class Prim:
         """
         Method that forms a minimum spanning tree from sets of edges and vertices.
         """
-        vertex = next(iter(self.vertices)) # Arbitrarily choose a starting vertex
+        if self.vertices:
+            vertex = next(iter(self.vertices)) # Arbitrarily choose a starting vertex
 
         # Loop over vertices that are not yet included in the mst.
         while self.vertices:

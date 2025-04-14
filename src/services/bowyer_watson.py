@@ -47,6 +47,8 @@ class Triangle:
         cx = self.p3[0]
         cy = self.p3[1]
         d = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by))
+        if d == 0:
+            return ((0, 0), float('inf'))
 
         ux = ((ax**2 + ay**2) * (by-cy) + (bx**2 + by**2) * (cy-ay) + (cx**2 + cy**2) * (ay-by)) / d
         uy = ((ax**2 + ay**2) * (cx-bx) + (bx**2 + by**2) * (ax-cx) + (cx**2 + cy**2) * (bx-ax)) / d
