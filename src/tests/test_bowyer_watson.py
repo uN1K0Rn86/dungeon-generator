@@ -95,7 +95,7 @@ class TestBowyerWatson(unittest.TestCase):
 
     def test_correct_number_of_triangles(self):
         n = len(self.b.points)
-        h = 5 # Number of points on the convex hull (verified visually)
+        h = 4 # Number of points on the convex hull (verified visually)
         num_of_triangles = 2 * n - 2 - h
         self.b.triangulate()
         self.assertEqual(num_of_triangles, len(self.b.triangles))

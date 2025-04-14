@@ -86,10 +86,15 @@ class BowyerWatson:
             if point[1] > ymax:
                 ymax = point[1]
 
-        square_width = max(xmax - xmin, ymax - ymin)
-        p1 = (xmin - 0.5 * square_width, ymin)
-        p2 = (xmin + 1.5 * square_width, ymin)
-        p3 = (xmin + 0.5 * square_width, ymin + 2 * square_width)
+        dx = xmax - xmin
+        dy = ymax - ymin
+        delta_max = max(dx, dy)
+        mid_x = (xmin + xmax) / 2
+        mid_y = (ymin + ymax) / 2
+
+        p1 = (mid_x - 20 * delta_max, mid_y - delta_max)
+        p2 = (mid_x, mid_y + 20 * delta_max)
+        p3 = (mid_x + 20 * delta_max, mid_y - delta_max)
 
         self.st = Triangle(p1, p2, p3)
 
@@ -210,6 +215,7 @@ class BowyerWatson:
         plt.show()
 
 if __name__ == "__main__":
+    # p = [(2.0, 5.0), (3.5, 9.5), (5.5, 16.0), (21.5, 18.5), (20.0, 4.0), (21.5, 14.0), (10.0, 5.0)]
     p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0)]
     b = BowyerWatson(p)
     b.triangulate()
