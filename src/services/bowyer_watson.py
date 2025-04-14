@@ -208,3 +208,9 @@ class BowyerWatson:
             plt.plot(t_x, t_y, color='green', linewidth=1)
 
         plt.show()
+
+if __name__ == "__main__":
+    p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0)]
+    b = BowyerWatson(p)
+    b.triangulate()
+    b.display()

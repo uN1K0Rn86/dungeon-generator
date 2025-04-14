@@ -92,6 +92,13 @@ class TestBowyerWatson(unittest.TestCase):
             visited = set()
             visit(point, visited, graph)
             self.assertEqual(visited, set(dungeon.d.points))
+
+    def test_correct_number_of_triangles(self):
+        n = len(self.b.points)
+        h = 5 # Number of points on the convex hull (verified visually)
+        num_of_triangles = 2 * n - 2 - h
+        self.b.triangulate()
+        self.assertEqual(num_of_triangles, len(self.b.triangles))
     
     @patch("matplotlib.pyplot.show")
     def test_display(self, mock_show):
