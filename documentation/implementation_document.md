@@ -19,7 +19,7 @@ Coming Soon
 
 ## LLM Usage
 
-ChatGPT was used to check syntax and help with matplotlib (examples only). All code was written independently of LLMs.
+ChatGPT was used to check syntax and help with matplotlib (examples only) and for brainstorming how to test algorithms. All code was written independently of LLMs.
 
 ## Sources
 

@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
-from random import randint
-from math import sqrt
+from random import randint, uniform
+from math import sqrt, pi, cos, sin
 from services.bowyer_watson import Edge, Triangle, BowyerWatson
 
 class TestTriangle(unittest.TestCase):
@@ -31,6 +31,20 @@ class TestBowyerWatson(unittest.TestCase):
     def test_is_in_circle(self):
         self.assertTrue(self.b.is_in_circle(self.b.points[3], self.tri))
         self.assertFalse(self.b.is_in_circle(self.b.points[4], self.tri))
+        
+        for _ in range(100):
+            theta = uniform(0, 2 * pi)
+            r = sqrt(uniform(self.tri.radius**2, (self.tri.radius*100)**2))
+            x = self.tri.center[0] + r * cos(theta)
+            y = self.tri.center[1] + r * sin(theta)
+            self.assertFalse(self.b.is_in_circle((x, y), self.tri))
+
+        for _ in range(100):
+            theta = uniform(0, 2 * pi)
+            r = self.tri.radius * sqrt(uniform(0, 1))
+            x = self.tri.center[0] + r * cos(theta)
+            y = self.tri.center[1] + r * sin(theta)
+            self.assertTrue(self.b.is_in_circle((x, y), self.tri))
 
     def test_is_unique(self):
         ab = Edge(self.b.points[0], self.b.points[1])
