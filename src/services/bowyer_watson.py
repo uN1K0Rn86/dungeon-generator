@@ -75,6 +75,8 @@ class BowyerWatson:
         ymin = float('inf')
         xmax = 0
         ymax = 0
+
+        # Find minimum and maximum x and y values
         for point in self.points:
             if point[0] < xmin:
                 xmin = point[0]
@@ -96,18 +98,19 @@ class BowyerWatson:
         p2 = (mid_x, mid_y + 20 * delta_max)
         p3 = (mid_x + 20 * delta_max, mid_y - delta_max)
 
+        self.xmin, self.xmax = xmin, xmax
+        self.ymin, self.ymax = ymin, ymax
         self.st = Triangle(p1, p2, p3)
-
         self.triangles = [self.st]
 
-    def triangulate(self):
+    def triangulate(self, demo=False):
         """
         Add all the points to the triangulation and remove any triangles that share an edge
         or vertex with the super triangle.
         """
 
         for point in self.points:
-            self.add_point(point)
+            self.add_point(point, demo)
 
         final_triangles = []
 
@@ -127,7 +130,7 @@ class BowyerWatson:
 
         self.triangles = final_triangles
 
-    def add_point(self, point):
+    def add_point(self, point, demo=False):
         """
         Add a point to the Delauney Triangulation.
         """
@@ -162,6 +165,8 @@ class BowyerWatson:
                 continue
 
         self.triangles = new_triangles
+        if demo:
+            self.display(point, True)
 
     def is_unique(self, edges, edge):
         """
@@ -193,17 +198,25 @@ class BowyerWatson:
 
         return distance < triangle.radius
 
-    def display(self):
+    def display(self, point=None, limits=False):
         """
         Create a plot displaying points, the super triangle, and the Delauney triangulation.
         """
 
-        x = [point[0] for point in self.points]
-        y = [point[1] for point in self.points]
+        if not point:
+            x = [point[0] for point in self.points]
+            y = [point[1] for point in self.points]
+        else:
+            x = point[0]
+            y = point[1]
+
         st_x = [self.st.p1[0], self.st.p2[0], self.st.p3[0], self.st.p1[0]]
         st_y = [self.st.p1[1], self.st.p2[1], self.st.p3[1], self.st.p1[1]]
 
         plt.figure(figsize=(6, 6))
+        if limits:
+            plt.xlim(self.xmin - 5, self.xmax + 5)
+            plt.ylim(self.ymin - 5, self.ymax + 5)
         plt.scatter(x, y, color='blue')
         plt.plot(st_x, st_y, color='red', linewidth=2)
 
@@ -218,5 +231,5 @@ if __name__ == "__main__":
     # p = [(2.0, 5.0), (3.5, 9.5), (5.5, 16.0), (21.5, 18.5), (20.0, 4.0), (21.5, 14.0), (10.0, 5.0)]
     p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0)]
     b = BowyerWatson(p)
-    b.triangulate()
-    b.display()
+    b.triangulate(True)
+    b.display(limits=True)
