@@ -3,6 +3,7 @@ from unittest.mock import patch
 from random import randint, uniform
 from math import sqrt, pi, cos, sin
 from services.bowyer_watson import Edge, Triangle, BowyerWatson
+from dungeon import Dungeon
 
 class TestTriangle(unittest.TestCase):
     def setUp(self):
@@ -62,6 +63,35 @@ class TestBowyerWatson(unittest.TestCase):
             for point in self.b.points:
                 if point not in tri_points:
                     self.assertFalse(self.b.is_in_circle(point, triangle))
+
+    def test_graph_is_connected(self):
+        dungeon = Dungeon(10000, 10000, 200, 200, 200)
+        dungeon.place_rooms()
+
+        def visit(vertex, visited, graph):
+            if vertex in visited:
+                return
+            visited.add(vertex)
+
+            for next_vertex in graph[vertex]:
+                visit(next_vertex, visited, graph)
+
+        graph = {}
+        for triangle in dungeon.d.triangles:
+            for edge in triangle.edges:
+                if edge.p1 not in graph:
+                    graph[edge.p1] = [edge.p2]
+                else:
+                    graph[edge.p1].append(edge.p2)
+                if edge.p2 not in graph:
+                    graph[edge.p2] = [edge.p1]
+                else:
+                    graph[edge.p2].append(edge.p1)
+
+        for point in dungeon.d.points:
+            visited = set()
+            visit(point, visited, graph)
+            self.assertEqual(visited, set(dungeon.d.points))
     
     @patch("matplotlib.pyplot.show")
     def test_display(self, mock_show):

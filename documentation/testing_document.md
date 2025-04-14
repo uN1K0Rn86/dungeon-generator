@@ -20,6 +20,8 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 - Delaunay_triangulation: this test first runs the Delaunay triangulation for a predetermined set of points. It then iterates through each triangle in the triangulation and checks that every point that is not a vertex of that triangle is NOT within the circumcircle of that triangle. If this is true for every triangle and every point not within that triangle, the Delaunay condition is fulfilled.
 
+- Graph_is_connected: this test makes sure that the graph produced by the Delaunay triangulation is connected i.e. every point is accessible from every point by following the edges of the triangles. A large dungeon is used to make sure this works.
+
 - Display: this test calls the display() -method and makes sure that matplotlib.pyplot.show is called once at the end of it, thus making sure that the display method gives no errors.
 
 ### Class Prim
