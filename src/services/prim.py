@@ -44,6 +44,8 @@ class Prim:
         """
         if self.vertices:
             vertex = next(iter(self.vertices)) # Arbitrarily choose a starting vertex
+        else:
+            vertex = None
 
         # Loop over vertices that are not yet included in the mst.
         while self.vertices:
