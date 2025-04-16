@@ -12,6 +12,8 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 - Circumcenter: the test uses the methods in the Triangle -class to calculate the circumcenter and the radius of the circumcircle. It then calculates the distance from each vertex to the calculated circumcenter and verifies that each of these distances is the same (according to the definition of a circumcenter).
 
+- Determinant_is_zero: this test verifies that an inline triangle produces a zero-determinant and returns the correct values for circumcenter and radius.
+
 ### Class BowyerWatson
 
 - Is_in_circle: this tests the method for determining if a point is within the circumcircle of a given triangle. The test checks that the method returns "True" for a point that is in the circumcircle and "False" for a point that is not.

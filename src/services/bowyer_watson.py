@@ -48,7 +48,7 @@ class Triangle:
         cy = self.p3[1]
         d = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by))
         if d == 0:
-            return ((0, 0), float('inf'))
+            return (None, float('inf'))
 
         ux = ((ax**2 + ay**2) * (by-cy) + (bx**2 + by**2) * (cy-ay) + (cx**2 + cy**2) * (ay-by)) / d
         uy = ((ax**2 + ay**2) * (cx-bx) + (bx**2 + by**2) * (ax-cx) + (cx**2 + cy**2) * (bx-ax)) / d
@@ -88,12 +88,15 @@ class BowyerWatson:
             if point[1] > ymax:
                 ymax = point[1]
 
+        # Determine which has a larger difference; x or y values and use that as a baseline
+        # for forming the super triangle
         dx = xmax - xmin
         dy = ymax - ymin
         delta_max = max(dx, dy)
         mid_x = (xmin + xmax) / 2
         mid_y = (ymin + ymax) / 2
 
+        # Assign points to the super triangle
         p1 = (mid_x - 20 * delta_max, mid_y - delta_max)
         p2 = (mid_x, mid_y + 20 * delta_max)
         p3 = (mid_x + 20 * delta_max, mid_y - delta_max)

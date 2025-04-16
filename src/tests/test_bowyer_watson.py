@@ -23,6 +23,11 @@ class TestTriangle(unittest.TestCase):
         self.assertAlmostEqual(d2, d3)
         self.assertAlmostEqual(d1, r)
 
+    def test_determinant_is_zero(self):
+        triangle = Triangle((1, 1), (2, 2), (3, 3))
+        self.assertEqual(triangle.center, None)
+        self.assertEqual(triangle.radius, float('inf'))
+
 class TestBowyerWatson(unittest.TestCase):
     def setUp(self):
         p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0)]
