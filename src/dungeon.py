@@ -28,9 +28,12 @@ class Dungeon:
         self.paths = None
         self.name = name
 
-    def place_rooms(self):
+    def place_rooms(self, demo=False):
         """
         Places the rooms into the dungeon, if they can fit
+
+        Args:
+            demo(Boolean): if true, add additional display calls for demonstration purposes.
         """
 
         for _ in range(self.rooms_amount):
@@ -64,16 +67,19 @@ class Dungeon:
 
             self.rooms.append(room)
 
-        self.delaunay()
+        self.delaunay(demo)
 
-    def delaunay(self):
+    def delaunay(self, demo=False):
         """
         Perform a Delaunay Triangulation using the center of each room as a point.
+
+        Args:
+            demo(Boolean): if true, add additional display calls for demonstration purposes.
         """
 
         room_centers = [(room.center_x, self.height - room.center_y) for room in self.rooms]
         self.d = BowyerWatson(room_centers)
-        self.d.triangulate()
+        self.d.triangulate(demo)
 
     def prim(self):
         """

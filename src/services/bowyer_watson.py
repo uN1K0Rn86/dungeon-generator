@@ -164,8 +164,8 @@ class BowyerWatson:
             try:
                 new_triangles.append(Triangle(edge.p1, edge.p2, point))
             # If the determinant used to calculate the circumcircle is 0, the triangle is inline and thus invalid
-            except ZeroDivisionError:
-                continue
+            except ZeroDivisionError: # pragma: no cover
+                continue # pragma: no cover
 
         self.triangles = new_triangles
         if demo:
