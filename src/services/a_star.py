@@ -85,11 +85,11 @@ class AStar:
 
         if x - 1 >= 0:
             adjacent.append((x - 1, y))
-        if x <= self.dungeon.width:
+        if x + 1 < self.dungeon.width:
             adjacent.append((x + 1, y))
         if y - 1 >= 0:
             adjacent.append((x, y - 1))
-        if y <= self.dungeon.height:
+        if y + 1 < self.dungeon.height:
             adjacent.append((x, y + 1))
 
         return adjacent

@@ -1,6 +1,6 @@
 import unittest
 from dungeon import Dungeon
-from services.a_star import AStar
+from services.a_star import AStar, Node
 
 class TestAStar(unittest.TestCase):
     def setUp(self):
@@ -30,3 +30,16 @@ class TestAStar(unittest.TestCase):
         path_length = abs(start[0] - goal[0]) + abs(start[1] - goal[1])
         path = AStar(self.dungeon).find_path(start, goal)
         self.assertEqual(len(path), path_length + 1)
+
+    def test_edge_nodes(self):
+        a_star = AStar(self.dungeon)
+        ne_node = Node((88, 0), 0, 5, None)
+        nw_node = Node((0, 1), 0, 5, None)
+        sw_node = Node((1, 79), 0, 5, None)
+        se_node = Node((89, 78), 0, 5, None)
+
+        nodes = [ne_node, nw_node, sw_node, se_node]
+
+        for node in nodes:
+            neighbors = a_star.neighbors(node)
+            self.assertEqual(len(neighbors), 3)
