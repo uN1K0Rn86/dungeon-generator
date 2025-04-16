@@ -48,6 +48,8 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 - Edge_nodes: this test makes sure that nodes that are on the edges of the dungeon do not have neighbors that would be outside the dungeon.
 
+- No_path_outside: this test makes sure that if the target node is outside of the dungeon, the A* algorithm doesn't find a path to it.
+
 ### Class Dungeon
 
 - Size_is_correct: this test makes sure the created dungeon has the length and width it is supposed to.

@@ -43,3 +43,10 @@ class TestAStar(unittest.TestCase):
         for node in nodes:
             neighbors = a_star.neighbors(node)
             self.assertEqual(len(neighbors), 3)
+
+    def test_no_path_outside(self):
+        a_star = AStar(self.dungeon)
+        goal = (200, 200)
+
+        path = a_star.find_path((50, 40), goal)
+        self.assertEqual(path, None)
