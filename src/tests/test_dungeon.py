@@ -7,6 +7,7 @@ class TestDungeon(unittest.TestCase):
         self.dungeon = Dungeon(50, 40, 10, 8, 7)
         self.dungeon.place_rooms()
         self.dungeon.prim()
+        self.dungeon.a_star()
 
     def test_size_is_correct(self):
         width = len(self.dungeon.tiles[0])
@@ -58,5 +59,11 @@ class TestDungeon(unittest.TestCase):
     @patch("matplotlib.pyplot.show")
     def test_display_prim(self, mock_show):
         self.dungeon.display("prim")
+
+        mock_show.assert_called_once()
+
+    @patch("matplotlib.pyplot.show")
+    def test_display_final(self, mock_show):
+        self.dungeon.display()
 
         mock_show.assert_called_once()
