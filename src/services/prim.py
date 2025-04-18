@@ -38,7 +38,7 @@ class Prim:
 
         self.mst = Mst()
 
-    def form_mst(self):
+    def form_mst(self, demo=False):
         """
         Method that forms a minimum spanning tree from sets of edges and vertices.
         """
@@ -72,11 +72,15 @@ class Prim:
                     next_v = edge.p1 if edge.p1 not in self.mst.vertices else edge.p2
                     next_e = edge
 
+            if demo:
+                self.display()
+
             # Remove edges that connect back into the MST from the next vertex
             for connection in self.graph[next_v]:
                 if connection in self.mst.vertices:
                     edge = Edge(next_v, connection)
                     self.mst.outgoing.remove(edge)
+
             if next_e:
                 self.mst.edges.add(next_e)
             vertex = next_v

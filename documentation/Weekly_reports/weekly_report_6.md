@@ -10,11 +10,11 @@
 
 ## What Was Unclear and / or Difficult
 
-
+I found a bug by chance that revealed that in some cases, the algorithm was not including all points in the triangulation. Finding the cause was quite difficult, but eventually I discovered that it was because the super triangle's bottom edge contained one of the points. The bug was fixed by making the super triangle larger.
 
 ## Next Steps
 
-
+Finalizing the program and polishing the demonstration.
 
 ## Time Tracking
 
@@ -22,7 +22,8 @@
 |------|---------------|-----------|
 | 14.4 | Bug fixes, tests | 2h |
 | 16.4 | Demo work, tests | 2h |
-| Total | | 4h |
+| 18.4 | Demo work | 2h |
+| Total | | 6h |
 
 ## Sources and LLM usage
 
