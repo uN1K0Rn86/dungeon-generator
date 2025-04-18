@@ -11,7 +11,15 @@ The core of the program is managed through the Dungeon -class. A Dungeon object 
 
 ## Time and Space Complexities
 
-Coming Soon
+### Bowyer-Watson
+
+- The Algorithm iterates over all points and inserts them one at a time. This means n insertions.
+- For each insertion, the algorithm iterates over all triangles currently in the triangulation. In the worst case, this happens n times, but on average it is log(n) times.
+- The algorithm then loops through all the unique edges of all the bad triangles and creates new triangles based on them. Since the amount of triangles is proportional to n, this is bounded to O(n).
+
+Since the edges are processed alongside the bad triangles, this step does not contribute significantly to the overall time complexity. The overall time complexity is ***O(n<sup>2</sup>)*** (worst case) or ***O(nlog n)*** (expected).
+
+### Prim
 
 ## Deficiencies and Possible Improvements
 
