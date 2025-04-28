@@ -86,9 +86,11 @@ class Ui:
             if room_maxheight == 0:
                 break
 
-            rooms_amount = self.validate_input("Amount of rooms:")
+            rooms_amount = self.validate_input("Amount of rooms: ")
             if rooms_amount == 0:
                 break
+
+            chance = self.validate_input("Chance to include additional hallways: (percentage, 5 suggested)")
 
             name = input("Name: ")
 
@@ -106,7 +108,7 @@ class Ui:
             if len(dungeon.rooms) < rooms_amount:
                 print("Could not fit all rooms into the dungeon.")
 
-            dungeon.prim()
+            dungeon.prim(chance)
             dungeon.a_star()
 
             ascii_print = input("Would you like an ascii printout of the dungeon? (y/n): ")

@@ -8,7 +8,7 @@ class TestPrim(unittest.TestCase):
     def setUp(self):
         self.dungeon = Dungeon(90, 80, 20, 19, 18)
         self.dungeon.place_rooms()
-        self.dungeon.prim()
+        self.dungeon.prim(0)
 
     def test_mst_has_correct_number_of_edges(self):
         edges = len(self.dungeon.paths.mst.edges)

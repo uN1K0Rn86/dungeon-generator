@@ -6,7 +6,7 @@ class TestDungeon(unittest.TestCase):
     def setUp(self):
         self.dungeon = Dungeon(50, 40, 10, 8, 7)
         self.dungeon.place_rooms()
-        self.dungeon.prim()
+        self.dungeon.prim(5)
         self.dungeon.a_star()
 
     def test_size_is_correct(self):

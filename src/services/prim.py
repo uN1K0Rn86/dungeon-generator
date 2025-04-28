@@ -1,4 +1,5 @@
 from collections import defaultdict
+from random import randint
 import numpy as np
 import matplotlib.pyplot as plt
 from services.bowyer_watson import Edge
@@ -18,7 +19,7 @@ class Prim:
     A class to implement Prim's algorithm.
     """
 
-    def __init__(self, triangles):
+    def __init__(self, triangles, chance):
         """
         Initialize a set of edges from triangles provided by the Bowyer-Watson algorithm,
         a dictionary of vertices showing their connections, and a set containing all vertices.
@@ -36,6 +37,7 @@ class Prim:
             self.vertices.add(edge.p1)
             self.vertices.add(edge.p2)
 
+        self.chance = chance
         self.mst = Mst()
 
     def form_mst(self, demo=False):
@@ -84,6 +86,28 @@ class Prim:
             if next_e:
                 self.mst.edges.add(next_e)
             vertex = next_v
+
+        if self.chance > 0:
+            additional_edges = self.add_loops()
+            self.mst.edges = self.mst.edges | additional_edges
+
+    def add_loops(self):
+        """
+        Adds additional paths to the MST to create loops in the dungeon.
+
+        Args: 
+            chance (int): percentage chance to include any given edge
+        Returns:
+            edges (set): set of edges to add to paths
+        """
+        edges = self.edges.difference(self.mst.edges)
+        additional_edges = set()
+
+        for edge in edges:
+            if randint(1, 100) <= self.chance:
+                additional_edges.add(edge)
+
+        return additional_edges
 
     def display(self):
         """

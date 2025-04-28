@@ -81,12 +81,12 @@ class Dungeon:
         self.d = BowyerWatson(room_centers)
         self.d.triangulate(demo)
 
-    def prim(self, demo=False):
+    def prim(self, chance, demo=False):
         """
         Use Prim's algorithm to find a minimum spanning tree of a Delaunay triangulation.
         """
 
-        self.paths = Prim(self.d.triangles)
+        self.paths = Prim(self.d.triangles, chance)
         self.paths.form_mst(demo)
 
     def a_star(self):
