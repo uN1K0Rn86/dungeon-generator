@@ -123,7 +123,7 @@ class AStar:
                 x, y = neighbor
                 if neighbor in closed or neighbor in open_coords:
                     continue
-                
+
                 if self.dungeon.tiles[y][x] == "#":
                     heapq.heappush(open_list, Node(neighbor, current.g + 1, self.heuristic(neighbor, goal), current))
                 else:
