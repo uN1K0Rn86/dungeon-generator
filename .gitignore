@@ -2,6 +2,7 @@
 coverage.xml
 *.tmp
 vertais.md
+vertais2.md
 
 **/__pycache__/
 .pytest_cache/

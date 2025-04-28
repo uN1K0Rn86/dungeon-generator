@@ -120,10 +120,14 @@ class AStar:
 
             neighbors = self.neighbors(current)
             for neighbor in neighbors:
+                x, y = neighbor
                 if neighbor in closed or neighbor in open_coords:
                     continue
-
-                heapq.heappush(open_list, Node(neighbor, current.g + 1, self.heuristic(neighbor, goal), current))
+                
+                if self.dungeon.tiles[y][x] == "#":
+                    heapq.heappush(open_list, Node(neighbor, current.g + 1, self.heuristic(neighbor, goal), current))
+                else:
+                    heapq.heappush(open_list, Node(neighbor, current.g, self.heuristic(neighbor, goal), current))
                 open_coords.add(neighbor)
 
         return None
