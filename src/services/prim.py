@@ -118,8 +118,6 @@ class Prim:
         y = [vertex[1] for vertex in vertices_list]
 
         plt.figure(figsize=(6, 6))
-        plt.xlim(0, 90)
-        plt.ylim(0, 80)
         plt.scatter(x, y, color='blue')
 
         for edge in self.mst.edges:
@@ -132,4 +130,5 @@ class Prim:
             e_y = [edge.p1[1], edge.p2[1]]
             plt.plot(e_x, e_y, color='red', linewidth=1)
 
+        print("Adding point to minimum spanning tree. Possible connections in red, added connections in green.")
         plt.show()

@@ -90,7 +90,7 @@ class Ui:
             if rooms_amount == 0:
                 break
 
-            chance = self.validate_input("Chance to include additional hallways: (percentage, 5 suggested)")
+            chance = self.validate_input("Chance to include additional hallways (percentage, 5 suggested) : ")
 
             name = input("Name: ")
 
@@ -101,7 +101,10 @@ class Ui:
                 print("Please choose a taller dungeon or lower room size")
                 continue
 
-            dungeon = Dungeon(width, height, room_maxwidth, room_maxheight, rooms_amount, name)
+            demo = bool(input("Would you like a step-by-step demonstration of how the dungeon is built? (y/n): ") == "y")
+
+
+            dungeon = Dungeon(width, height, room_maxwidth, room_maxheight, rooms_amount, name, demo)
             dungeon.place_rooms()
             self.dungeons.append(dungeon)
 

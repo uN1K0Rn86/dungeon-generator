@@ -228,6 +228,7 @@ class BowyerWatson:
             t_y = [triangle.p1[1], triangle.p2[1], triangle.p3[1], triangle.p1[1]]
             plt.plot(t_x, t_y, color='green', linewidth=1)
 
+        print("Adding point to Delaunay triangulation. Zoom out to see super triangle.")
         plt.show()
 
 if __name__ == "__main__":

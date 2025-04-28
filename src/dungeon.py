@@ -11,7 +11,7 @@ class Dungeon:
     The class dungeon models the dungeon created by the algorithms.
     """
 
-    def __init__(self, width, height, room_maxwidth, room_maxheight, rooms_amount, name=""):
+    def __init__(self, width, height, room_maxwidth, room_maxheight, rooms_amount, name="", demo=False):
         """
         The constructor, which sets initial properties for the dungeon
         """
@@ -27,8 +27,9 @@ class Dungeon:
         self.d = None
         self.paths = None
         self.name = name
+        self.demo = demo
 
-    def place_rooms(self, demo=False):
+    def place_rooms(self):
         """
         Places the rooms into the dungeon, if they can fit
 
@@ -67,9 +68,9 @@ class Dungeon:
 
             self.rooms.append(room)
 
-        self.delaunay(demo)
+        self.delaunay()
 
-    def delaunay(self, demo=False):
+    def delaunay(self):
         """
         Perform a Delaunay Triangulation using the center of each room as a point.
 
@@ -79,15 +80,15 @@ class Dungeon:
 
         room_centers = [(room.center_x, self.height - room.center_y) for room in self.rooms]
         self.d = BowyerWatson(room_centers)
-        self.d.triangulate(demo)
+        self.d.triangulate(self.demo)
 
-    def prim(self, chance, demo=False):
+    def prim(self, chance):
         """
         Use Prim's algorithm to find a minimum spanning tree of a Delaunay triangulation.
         """
 
         self.paths = Prim(self.d.triangles, chance)
-        self.paths.form_mst(demo)
+        self.paths.form_mst(self.demo)
 
     def a_star(self):
         """
@@ -141,7 +142,7 @@ class Dungeon:
                 e_x = [edge.p1[0], edge.p2[0]]
                 e_y = [edge.p1[1], edge.p2[1]]
                 plt.plot(e_x, e_y, color='green', linewidth=1, label=label)
-                plt.title("Minimum Spanning Tree")
+                plt.title("Paths found by Prim's algorithm")
         else:
             for idx, tile in enumerate(self.hallways):
                 label = 'Hallway' if idx == 0 else None
