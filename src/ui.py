@@ -17,7 +17,7 @@ class Ui:
         The method used to start the dungeon generator.
         """
 
-        print("Welcome to the Dungeon Generator")
+        print("*** Welcome to the Dungeon Generator ***")
         self.menu()
 
     def menu(self):
@@ -111,16 +111,16 @@ class Ui:
             if len(dungeon.rooms) < rooms_amount:
                 print("Could not fit all rooms into the dungeon.")
 
+            plot = input("Would you like a graphical plot of the dungeon with a Delaunay triangulation? (y/n): ")
+            if plot == "y":
+                dungeon.display("delaunay")
+
             dungeon.prim(chance)
             dungeon.a_star()
 
             ascii_print = input("Would you like an ascii printout of the dungeon? (y/n): ")
             if ascii_print == "y":
                 print(dungeon)
-
-            plot = input("Would you like a graphical plot of the dungeon with a Delaunay triangulation? (y/n): ")
-            if plot == "y":
-                dungeon.display("delaunay")
 
             prim = input("Would you like a minimum spanning tree of the Delaunay triangulation? (y/n): ")
             if prim == "y":
@@ -188,5 +188,5 @@ class Ui:
         Exits the program.
         """
 
-        print("Thank You!")
+        print("*** Thank You! ***")
         sys.exit()
