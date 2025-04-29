@@ -13,7 +13,7 @@ The core of the program is managed through the Dungeon -class. A Dungeon object 
 
 ### Bowyer-Watson
 
-- The Algorithm iterates over all points and inserts them one at a time. This means n insertions.
+- The algorithm iterates over all points and inserts them one at a time. This means n insertions.
 - For each insertion, the algorithm iterates over all triangles currently in the triangulation. In the worst case, this happens n times, but on average it is log(n) times.
 - The algorithm then loops through all the unique edges of all the bad triangles and creates new triangles based on them. Since the amount of triangles is proportional to n, this is bounded to O(n).
 
@@ -21,9 +21,21 @@ Since the edges are processed alongside the bad triangles, this step does not co
 
 ### Prim
 
+- The algorithm adds all edges from triangles to a set of edges. It then adds each vertex to a set of vertices and makes a graph out of the edges. This effectively takes O(V) time.
+- During the actual formation of the MST, the algorithm scans all outgoing edges from each vertex. This takes at worst O(E) time.
+
+These are the bottlenecks, so the total time complexity is ***O(VE)***, with V being the number of vertices and E the number of edges.
+
+### A*
+
+- The algorithm calls the find_path() -method once per edge (connection between two rooms).
+- The find_path() -method processes each node (N) once. Each heap operation costs O(log N), but the number of elements in the heap is mostly less than N.
+
+The overall time complexity is therefore ***O(E * N log N)***.
+
 ## Deficiencies and Possible Improvements
 
-Coming Soon
+- Prim's algorithm could be optimized by using a priority queue to process outgoing edges. This way the algorithm wouldn't have to iterate over the whole set every time, improving time complexity to ***O((V+E) log V)***.
 
 ## LLM Usage
 
