@@ -17,7 +17,7 @@ class Ui:
         The method used to start the dungeon generator.
         """
 
-        print("*** Welcome to the Dungeon Generator ***")
+        print("*** Welcome to the Dungeon Generator ***\n")
         self.menu()
 
     def menu(self):
@@ -25,11 +25,11 @@ class Ui:
         Prints the main menu and calls other methods based on user input.
         """
 
-        print("Choose from the following:")
+        print("*** Choose from the following: ***")
         print("1: Generate Dungeon")
         print("2: Legend")
         print("3: View Dungeons")
-        print("4: Exit")
+        print("4: Exit\n")
         command = input("Command: ")
         print("\n")
 
@@ -94,6 +94,8 @@ class Ui:
 
             name = input("Name: ")
 
+            print("\n")
+
             if width - room_maxwidth < 2:
                 print("Please choose a wider dungeon or narrower room size")
                 continue
@@ -103,6 +105,7 @@ class Ui:
 
             demo = bool(input("Would you like a step-by-step demonstration of how the dungeon is built? (y/n): ") == "y")
 
+            print("\n")
 
             dungeon = Dungeon(width, height, room_maxwidth, room_maxheight, rooms_amount, name, demo)
             dungeon.place_rooms()
@@ -115,6 +118,8 @@ class Ui:
             if plot == "y":
                 dungeon.display("delaunay")
 
+            print("\n")
+
             dungeon.prim(chance)
             dungeon.a_star()
 
@@ -122,11 +127,15 @@ class Ui:
             if ascii_print == "y":
                 print(dungeon)
 
-            prim = input("Would you like a minimum spanning tree of the Delaunay triangulation? (y/n): ")
+            print("\n")
+
+            prim = input("Would you like to see the paths found by Prim's algorithm? (y/n): ")
             if prim == "y":
                 dungeon.display("prim")
 
-            print("Here is the dungeon in its final form: ")
+            print("\n")
+
+            print("Here is the dungeon in its final form: \n")
             dungeon.display()
 
         self.menu()

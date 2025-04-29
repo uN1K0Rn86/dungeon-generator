@@ -70,7 +70,13 @@ Automated unit testing is done where applicable. Explanations for each test are 
 
 ## UI Testing
 
-For now, UI testing has been done manually. In the future I will either come up with a robust a repeatable routine for thorough UI manual testing, or (more likely) automate it. This will be decided once the UI has a more permanent form.
+Since it is not required nor is it a priority for this course and the UI is very rudimentary, UI testing has only been done manually.
+
+## Integration Testing
+
+The unit tests are designed in such a way that they mostly use other elements of the program. For example, the tests for all the different algorithms use Dungeon -class objects instead of arrays or points as inputs. This ensures that the algorithms can handle the objects correctly. Additionally, it provides an element of randomness to the tests, as rooms are placed into dungeons randomly. Effectively, this means that no two test runs are completely identical (for the tests that use the Dungeon -objects).
+
+This type of integration testing adds meaningful code coverage to the tests. 
 
 ## Running Tests
 
@@ -92,4 +98,12 @@ poetry install
 and run the tests:
 ```
 pytest
+```
+
+if you want to see a coverage report:
+```
+coverage run --branch -m pytest
+```
+```
+coverage report -m
 ```

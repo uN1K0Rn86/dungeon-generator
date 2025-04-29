@@ -161,11 +161,7 @@ class BowyerWatson:
 
         # Use unique edges to form new triangles
         for edge in unique_edges:
-            try:
-                new_triangles.append(Triangle(edge.p1, edge.p2, point))
-            # If the determinant used to calculate the circumcircle is 0, the triangle is inline and thus invalid
-            except ZeroDivisionError: # pragma: no cover
-                continue # pragma: no cover
+            new_triangles.append(Triangle(edge.p1, edge.p2, point))
 
         self.triangles = new_triangles
         if demo: # pragma: no cover
