@@ -75,7 +75,7 @@ class Prim:
                     next_e = edge
 
             if demo:
-                self.display()
+                self.display() # pragma: no cover
 
             # Remove edges that connect back into the MST from the next vertex
             for connection in self.graph[next_v]:
@@ -125,7 +125,7 @@ class Prim:
             e_y = [edge.p1[1], edge.p2[1]]
             plt.plot(e_x, e_y, color='green', linewidth=1)
 
-        for edge in self.mst.outgoing:
+        for edge in self.mst.outgoing: # pragma: no cover
             e_x = [edge.p1[0], edge.p2[0]]
             e_y = [edge.p1[1], edge.p2[1]]
             plt.plot(e_x, e_y, color='red', linewidth=1)

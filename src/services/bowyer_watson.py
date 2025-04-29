@@ -168,7 +168,7 @@ class BowyerWatson:
                 continue # pragma: no cover
 
         self.triangles = new_triangles
-        if demo:
+        if demo: # pragma: no cover
             self.display(point, True)
 
     def is_unique(self, edges, edge):
@@ -230,10 +230,3 @@ class BowyerWatson:
 
         print("Adding point to Delaunay triangulation. Zoom out to see super triangle.")
         plt.show()
-
-if __name__ == "__main__":
-    # p = [(2.0, 5.0), (3.5, 9.5), (5.5, 16.0), (21.5, 18.5), (20.0, 4.0), (21.5, 14.0), (10.0, 5.0)]
-    p = [(1, 1), (2, 2), (3, 2), (3, 1), (3, 7), (6, 4), (5, 0)]
-    b = BowyerWatson(p)
-    b.triangulate(True)
-    b.display(limits=True)

@@ -107,7 +107,8 @@ class TestBowyerWatson(unittest.TestCase):
     
     @patch("matplotlib.pyplot.show")
     def test_display(self, mock_show):
+        self.b.display((1, 1), True)
         self.b.triangulate()
         self.b.display()
 
-        mock_show.assert_called_once()
+        self.assertEqual(mock_show.call_count, 2)
