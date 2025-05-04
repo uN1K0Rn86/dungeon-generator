@@ -17,6 +17,7 @@
 - [Weekly report 3](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_3.md)
 - [Weekly report 4](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_4.md)
 - [Weekly report 5](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_5.md)
+- [Weekly report 6](https://github.com/uN1K0Rn86/dungeon-generator/blob/main/documentation/Weekly_reports/weekly_report_6.md)
 
 ## Installation Instructions
 
