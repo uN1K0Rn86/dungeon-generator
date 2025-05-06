@@ -149,8 +149,8 @@ class Ui:
             print("No dungeons to view. Please create a dungeon first.\n")
             self.menu()
         else:
+            print("Created dungeons:")
             for dungeon in self.dungeons:
-                print("Created dungeons:")
                 print(dungeon.name)
 
         while True:
