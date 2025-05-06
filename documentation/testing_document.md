@@ -95,6 +95,11 @@ install dependencies:
 poetry install
 ```
 
+start the virtual environment:
+```
+poetry shell
+```
+
 and run the tests:
 ```
 pytest
