@@ -138,7 +138,7 @@ class Dungeon:
                 plt.title("Delaunay Triangulation")
         elif mode == "prim":
             for idx, edge in enumerate(self.paths.mst.edges):
-                label = 'MST' if idx == 0 else None
+                label = 'Paths' if idx == 0 else None
                 e_x = [edge.p1[0], edge.p2[0]]
                 e_y = [edge.p1[1], edge.p2[1]]
                 plt.plot(e_x, e_y, color='green', linewidth=1, label=label)
