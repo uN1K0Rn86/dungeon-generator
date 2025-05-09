@@ -1,11 +1,16 @@
 import heapq
+from typing import TYPE_CHECKING, List, Set, Tuple, Optional
+
+if TYPE_CHECKING:
+    from bowyer_watson import Edge
+    from dungeon import Dungeon
 
 class Node:
     """
     A class to represent a node for the A-Star algorithm.
     """
 
-    def __init__(self, coordinates, g, h, parent):
+    def __init__(self, coordinates: Tuple, g: int, h: int, parent: Optional["Node"]):
         """
         Constructor that initializes the properties for the node
         """
@@ -25,12 +30,12 @@ class AStar:
     """
     A class to represent an implementation of the A-Star algorithm.
     """
-    def __init__(self, dungeon):
+    def __init__(self, dungeon: "Dungeon"):
         """
         A constructor that initializes a list of tiles and a list of edges.
         """
         self.dungeon = dungeon
-        self.edges = dungeon.paths.mst.edges
+        self.edges: Set["Edge"] = dungeon.paths.mst.edges
 
     def run(self):
         """
@@ -47,30 +52,30 @@ class AStar:
                     self.dungeon.hallways.append(tile)
                 self.dungeon.tiles[tile[1]][tile[0]] = "."
 
-    def heuristic(self, current, goal):
+    def heuristic(self, current: tuple, goal: Tuple) -> int:
         """
         Gives an estimate of the length of the path to the goal.
         """
 
         return abs(current[0] - goal[0]) + abs(current[1] - goal[1])
 
-    def reconstruct_path(self, node):
+    def reconstruct_path(self, node: Node) -> List[Tuple]:
         """
         Reconstructs the path from a node to the start node.
 
         Args:
             node(Node): the current node
         Returns:
-            path(list): a list of nodes that forms a path to the start node
+            path(list): a list of coordinates that forms a path to the start node
         """
-        path = []
+        path: List[Tuple] = []
         while node:
             path.append(node.coordinates)
             node = node.parent
 
         return path
 
-    def neighbors(self, node):
+    def neighbors(self, node: Node) -> List[Tuple]:
         """
         Make a list of the neighbors of a node, assuming they are in the dungeon.
 
@@ -80,7 +85,7 @@ class AStar:
         Returns:
             adjacent(list): A list of coordinates of neighboring nodes
         """
-        adjacent = []
+        adjacent: List[Tuple] = []
         x, y = node.coordinates
 
         if x - 1 >= 0:
@@ -94,20 +99,21 @@ class AStar:
 
         return adjacent
 
-    def find_path(self, start, goal):
+    def find_path(self, start: Tuple, goal: Tuple) -> Optional[List[Tuple]]:
         """
         Implementation of the A-Star algorithm that forms a path from the start node to the goal.
 
         Args:
             start(tuple): coordinates of the starting node
+            goal(tuple): coordinates of the goal node
         Returns:
             path(list): a list that forms a path from the start node to the goal
         """
         start_node = Node(start, 0, self.heuristic(start, goal), None)
 
-        open_list = [start_node]
-        open_coords = {start}
-        closed = set()
+        open_list: List[Node] = [start_node]
+        open_coords: Set[Tuple] = {start}
+        closed: Set[Tuple] = set()
 
         while open_list:
             current = heapq.heappop(open_list)
