@@ -1,5 +1,5 @@
 from random import randint
-from typing import List
+from typing import List, Optional
 import matplotlib.pyplot as plt
 from matplotlib import patches
 from room import Room
@@ -25,8 +25,8 @@ class Dungeon:
         self.rooms: List[Room] = []
         self.hallways: List[tuple] = []
         self.full = False
-        self.d = None
-        self.paths = None
+        self.d: Optional[BowyerWatson] = None
+        self.paths: Optional[Prim] = None
         self.name = name
         self.demo = demo
 
@@ -88,7 +88,7 @@ class Dungeon:
         Use Prim's algorithm to find a minimum spanning tree of a Delaunay triangulation.
         """
 
-        self.paths = Prim(self.d.triangles, chance)
+        self.paths = Prim(self.d.triangles, chance) # type: ignore[union-attr]
         self.paths.form_mst(self.demo)
 
     def a_star(self):

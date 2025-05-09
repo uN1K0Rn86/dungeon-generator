@@ -13,8 +13,8 @@ class Room:
         self.height = randint(2, maxheight)
         self.corner_x = 0
         self.corner_y = 0
-        self.center_x = 0
-        self.center_y = 0
+        self.center_x = 0.0
+        self.center_y = 0.0
 
     def set_corner(self, x: int, y: int):
         """

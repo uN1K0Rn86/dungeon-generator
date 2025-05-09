@@ -17,7 +17,11 @@ pytest = "^8.3.5"
 pytest-cov = "^6.0.0"
 pylint = "^3.3.5"
 networkx = "^3.4.2"
+mypy = "^1.15.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+exclude = ["^src/tests/"]

@@ -10,7 +10,7 @@ class Mst:
     A class to represent a minimum spanning tree.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.outgoing: Set[Edge] = set()
         self.vertices: Set[Tuple] = set()
         self.edges: Set[Edge] = set()
@@ -41,17 +41,17 @@ class Prim:
         self.chance = chance
         self.mst = Mst()
 
-    def form_mst(self, demo=False):
+    def form_mst(self, demo: bool = False) -> None:
         """
         Method that forms a minimum spanning tree from sets of edges and vertices.
         """
-        if self.vertices:
-            vertex = next(iter(self.vertices)) # Arbitrarily choose a starting vertex
-        else:
-            vertex = None # pragma: no cover
+        if not self.vertices:
+            return
+        
+        vertex: Tuple[int, int] = next(iter(self.vertices)) # Arbitrarily choose a starting vertex
 
         # Loop over vertices that are not yet included in the mst.
-        while self.vertices:
+        while vertex is not None and self.vertices:
             # Add the vertex to the MST and remove it from the set of vertices still to be added
             self.mst.vertices.add(vertex)
             self.vertices.discard(vertex)
@@ -65,7 +65,7 @@ class Prim:
                     self.mst.outgoing.add(edge)
 
             next_v: Optional[Tuple] = None
-            next_e: Optional[Tuple] = None
+            next_e: Optional[Edge] = None
 
             # Loop over possible connections and determine the shortest
             for edge in self.mst.outgoing:
@@ -79,14 +79,15 @@ class Prim:
                 self.display() # pragma: no cover
 
             # Remove edges that connect back into the MST from the next vertex
-            for connection in self.graph[next_v]:
-                if connection in self.mst.vertices:
-                    edge = Edge(next_v, connection)
-                    self.mst.outgoing.remove(edge)
+            if next_v:
+                for connection in self.graph[next_v]:
+                    if connection in self.mst.vertices:
+                        edge = Edge(next_v, connection)
+                        self.mst.outgoing.remove(edge)
+                        vertex = next_v
 
             if next_e:
                 self.mst.edges.add(next_e)
-            vertex = next_v
 
         if self.chance > 0:
             additional_edges = self.add_loops()

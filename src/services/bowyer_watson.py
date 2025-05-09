@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -7,7 +7,7 @@ class Edge:
     A class to represent an edge (line) between two points.
     """
 
-    def __init__(self, p1: tuple, p2: tuple):
+    def __init__(self, p1: Tuple, p2: Tuple):
         """
         Constructor that initializes the points of the edge.
         """
@@ -25,7 +25,7 @@ class Triangle:
     A class to represent triangles consisting of 3 points.
     """
 
-    def __init__(self, p1: tuple, p2: tuple, p3: tuple):
+    def __init__(self, p1: Tuple, p2: Tuple, p3: Tuple):
         """
         Constructor that initializes the 3 vertices of the triangle, the circumcenter, and the radius.
         """
@@ -33,7 +33,7 @@ class Triangle:
         self.p2 = (p2[0], p2[1])
         self.p3 = (p3[0], p3[1])
         self.edges = (Edge(self.p1, self.p2), Edge(self.p2, self.p3), Edge(self.p3, self.p1))
-        self.center: tuple = self.circumcenter()[0]
+        self.center: Tuple = self.circumcenter()[0]
         self.radius: int = self.circumcenter()[1]
 
     def circumcenter(self) -> tuple:
@@ -107,7 +107,7 @@ class BowyerWatson:
         self.st = Triangle(p1, p2, p3)
         self.triangles: List[Triangle] = [self.st]
 
-    def triangulate(self, demo=False):
+    def triangulate(self, demo: bool = False) -> None:
         """
         Add all the points to the triangulation and remove any triangles that share an edge
         or vertex with the super triangle.
@@ -134,7 +134,7 @@ class BowyerWatson:
 
         self.triangles = final_triangles
 
-    def add_point(self, point, demo=False):
+    def add_point(self, point: Tuple, demo: bool = False):
         """
         Add a point to the Delauney Triangulation.
         """

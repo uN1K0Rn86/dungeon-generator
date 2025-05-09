@@ -2,7 +2,7 @@ import heapq
 from typing import TYPE_CHECKING, List, Set, Tuple, Optional
 
 if TYPE_CHECKING:
-    from bowyer_watson import Edge
+    from .bowyer_watson import Edge
     from dungeon import Dungeon
 
 class Node:
@@ -35,7 +35,7 @@ class AStar:
         A constructor that initializes a list of tiles and a list of edges.
         """
         self.dungeon = dungeon
-        self.edges: Set["Edge"] = dungeon.paths.mst.edges
+        self.edges: Set[Edge] = dungeon.paths.mst.edges # type: ignore[union-attr]
 
     def run(self):
         """
@@ -59,7 +59,7 @@ class AStar:
 
         return abs(current[0] - goal[0]) + abs(current[1] - goal[1])
 
-    def reconstruct_path(self, node: Node) -> List[Tuple]:
+    def reconstruct_path(self, node: Optional[Node]) -> List[Tuple]:
         """
         Reconstructs the path from a node to the start node.
 
