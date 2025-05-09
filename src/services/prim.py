@@ -1,8 +1,9 @@
 from collections import defaultdict
 from random import randint
+from typing import Set, List, DefaultDict, Tuple, Optional
 import numpy as np
 import matplotlib.pyplot as plt
-from services.bowyer_watson import Edge
+from services.bowyer_watson import Edge, Triangle
 
 class Mst:
     """
@@ -10,27 +11,27 @@ class Mst:
     """
 
     def __init__(self):
-        self.outgoing = set()
-        self.vertices = set()
-        self.edges = set()
+        self.outgoing: Set[Edge] = set()
+        self.vertices: Set[Tuple] = set()
+        self.edges: Set[Edge] = set()
 
 class Prim:
     """
     A class to implement Prim's algorithm.
     """
 
-    def __init__(self, triangles, chance):
+    def __init__(self, triangles: List[Triangle], chance: int):
         """
         Initialize a set of edges from triangles provided by the Bowyer-Watson algorithm,
         a dictionary of vertices showing their connections, and a set containing all vertices.
         """
-        self.edges = set()
+        self.edges: Set[Edge] = set()
         for triangle in triangles:
             for edge in triangle.edges:
                 self.edges.add(edge)
 
-        self.graph = defaultdict(set)
-        self.vertices = set()
+        self.graph: DefaultDict[Tuple[int, int], Set[Tuple[int, int]]] = defaultdict(set)
+        self.vertices: Set[Tuple] = set()
         for edge in self.edges:
             self.graph[edge.p1].add(edge.p2)
             self.graph[edge.p2].add(edge.p1)
@@ -63,8 +64,8 @@ class Prim:
                     edge = Edge(vertex, connection)
                     self.mst.outgoing.add(edge)
 
-            next_v = None
-            next_e = None
+            next_v: Optional[Tuple] = None
+            next_e: Optional[Tuple] = None
 
             # Loop over possible connections and determine the shortest
             for edge in self.mst.outgoing:
@@ -91,7 +92,7 @@ class Prim:
             additional_edges = self.add_loops()
             self.mst.edges = self.mst.edges | additional_edges
 
-    def add_loops(self):
+    def add_loops(self) -> Set[Edge]:
         """
         Adds additional paths to the MST to create loops in the dungeon.
 
@@ -100,8 +101,8 @@ class Prim:
         Returns:
             edges (set): set of edges to add to paths
         """
-        edges = self.edges.difference(self.mst.edges)
-        additional_edges = set()
+        edges: Set[Edge] = self.edges.difference(self.mst.edges)
+        additional_edges: Set[Edge] = set()
 
         for edge in edges:
             if randint(1, 100) <= self.chance:
