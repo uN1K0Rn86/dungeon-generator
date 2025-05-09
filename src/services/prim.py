@@ -47,7 +47,7 @@ class Prim:
         """
         if not self.vertices:
             return
-        
+
         vertex: Tuple[int, int] = next(iter(self.vertices)) # Arbitrarily choose a starting vertex
 
         # Loop over vertices that are not yet included in the mst.
