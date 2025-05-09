@@ -42,7 +42,7 @@ class Ui:
         elif command == "4":
             self.quit()
 
-    def validate_input(self, prompt):
+    def validate_input(self, prompt: str) -> int:
         """
         Validates user input
 

@@ -37,6 +37,8 @@ The overall time complexity is therefore ***O(E * N log N)***.
 
 - Prim's algorithm could be optimized by using a priority queue to process outgoing edges. This way the algorithm wouldn't have to iterate over the whole set every time, improving time complexity to ***O((V+E) log V)***.
 
+- The A* algorithm can currently form two hallways between rooms in some cases. This happens because the rooms don't have assigned "door" tiles, and sometimes the algorithm finds an alternate path before an existing one. This could be fixed by assigning door tiles to rooms.
+
 ## LLM Usage
 
 ChatGPT was used to check syntax and help with matplotlib (examples only) and for brainstorming how to test algorithms. All code was written independently of LLMs.

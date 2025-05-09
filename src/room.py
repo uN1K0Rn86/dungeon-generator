@@ -5,7 +5,7 @@ class Room:
     This class models a room. 
     """
 
-    def __init__(self, maxwidth, maxheight):
+    def __init__(self, maxwidth: int, maxheight: int):
         """
         Constructor that sets a random width and height and initializes locational properties.
         """
@@ -16,7 +16,7 @@ class Room:
         self.center_x = 0
         self.center_y = 0
 
-    def set_corner(self, x, y):
+    def set_corner(self, x: int, y: int):
         """
         Method that sets the upper left corner coordinates and calculates the center point.
         """

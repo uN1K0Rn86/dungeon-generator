@@ -1,4 +1,5 @@
 from random import randint
+from typing import List
 import matplotlib.pyplot as plt
 from matplotlib import patches
 from room import Room
@@ -11,7 +12,7 @@ class Dungeon:
     The class dungeon models the dungeon created by the algorithms.
     """
 
-    def __init__(self, width, height, room_maxwidth, room_maxheight, rooms_amount, name="", demo=False):
+    def __init__(self, width: int, height: int, room_maxwidth: int, room_maxheight: int, rooms_amount: int, name="", demo=False):
         """
         The constructor, which sets initial properties for the dungeon
         """
@@ -21,8 +22,8 @@ class Dungeon:
         self.room_maxheight = room_maxheight
         self.rooms_amount = rooms_amount
         self.tiles = [["#" for i in range(width)] for j in range(height)]
-        self.rooms = []
-        self.hallways = []
+        self.rooms: List[Room] = []
+        self.hallways: List[tuple] = []
         self.full = False
         self.d = None
         self.paths = None
@@ -78,11 +79,11 @@ class Dungeon:
             demo(Boolean): if true, add additional display calls for demonstration purposes.
         """
 
-        room_centers = [(room.center_x, self.height - room.center_y) for room in self.rooms]
+        room_centers: List[tuple] = [(room.center_x, self.height - room.center_y) for room in self.rooms]
         self.d = BowyerWatson(room_centers)
         self.d.triangulate(self.demo)
 
-    def prim(self, chance):
+    def prim(self, chance: int):
         """
         Use Prim's algorithm to find a minimum spanning tree of a Delaunay triangulation.
         """
