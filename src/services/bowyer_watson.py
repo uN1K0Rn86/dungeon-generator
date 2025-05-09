@@ -1,3 +1,4 @@
+from typing import List
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -6,7 +7,7 @@ class Edge:
     A class to represent an edge (line) between two points.
     """
 
-    def __init__(self, p1, p2):
+    def __init__(self, p1: tuple, p2: tuple):
         """
         Constructor that initializes the points of the edge.
         """
@@ -24,7 +25,7 @@ class Triangle:
     A class to represent triangles consisting of 3 points.
     """
 
-    def __init__(self, p1, p2, p3):
+    def __init__(self, p1: tuple, p2: tuple, p3: tuple):
         """
         Constructor that initializes the 3 vertices of the triangle, the circumcenter, and the radius.
         """
@@ -32,10 +33,10 @@ class Triangle:
         self.p2 = (p2[0], p2[1])
         self.p3 = (p3[0], p3[1])
         self.edges = (Edge(self.p1, self.p2), Edge(self.p2, self.p3), Edge(self.p3, self.p1))
-        self.center = self.circumcenter()[0]
-        self.radius = self.circumcenter()[1]
+        self.center: tuple = self.circumcenter()[0]
+        self.radius: int = self.circumcenter()[1]
 
-    def circumcenter(self):
+    def circumcenter(self) -> tuple:
         """
         Calculates the center point of the circumcircle and its radius.
         """
@@ -63,12 +64,12 @@ class BowyerWatson:
     Class for the Bowyer-Watson algorithm
     """
 
-    def __init__(self, points):
+    def __init__(self, points: List[tuple]):
         """
         Constructor that initializes a super triangle containing all the given points.
         """
 
-        self.points = points
+        self.points: List[tuple] = points
 
         # Initialize the super triangle containing all points.
         xmin = float('inf')
@@ -104,7 +105,7 @@ class BowyerWatson:
         self.xmin, self.xmax = xmin, xmax
         self.ymin, self.ymax = ymin, ymax
         self.st = Triangle(p1, p2, p3)
-        self.triangles = [self.st]
+        self.triangles: List[Triangle] = [self.st]
 
     def triangulate(self, demo=False):
         """
@@ -115,7 +116,7 @@ class BowyerWatson:
         for point in self.points:
             self.add_point(point, demo)
 
-        final_triangles = []
+        final_triangles: List[Triangle] = []
 
         # Find which triangles share edges or vertices with the super triangle and discard those
         for triangle in self.triangles:
@@ -138,8 +139,8 @@ class BowyerWatson:
         Add a point to the Delauney Triangulation.
         """
 
-        edges = []
-        new_triangles = []
+        edges: List[Edge] = []
+        new_triangles: List[Triangle] = []
 
         # Iterate through all triangles
         for triangle in self.triangles:
@@ -152,7 +153,7 @@ class BowyerWatson:
                 # Add valid triangles to the list of new triangles.
                 new_triangles.append(triangle)
 
-        unique_edges = []
+        unique_edges: List[Edge] = []
 
         # Find which edges are unique
         for edge in edges:
@@ -167,7 +168,7 @@ class BowyerWatson:
         if demo: # pragma: no cover
             self.display(point, True)
 
-    def is_unique(self, edges, edge):
+    def is_unique(self, edges: List[Edge], edge: Edge) -> bool:
         """
         Determines whether an edge in a list of edges is unique.
         
@@ -181,7 +182,7 @@ class BowyerWatson:
 
         return edges.count(edge) == 1
 
-    def is_in_circle(self, point, triangle):
+    def is_in_circle(self, point: tuple, triangle: Triangle) -> bool:
         """
         Check if a point is inside the circumcircle of a triangle.
 
