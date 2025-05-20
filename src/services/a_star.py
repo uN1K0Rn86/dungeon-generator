@@ -1,7 +1,7 @@
 import heapq
 from typing import TYPE_CHECKING, List, Set, Tuple, Optional
 
-if TYPE_CHECKING:
+if TYPE_CHECKING: # pragma: no cover
     from .bowyer_watson import Edge
     from dungeon import Dungeon
 

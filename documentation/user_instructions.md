@@ -30,7 +30,7 @@ Follow the instructions given by the application.
 
 Run the tests by navigating to the application's root folder and running the command
 ```
-Pytest
+poetry run pytest
 ```
 
 To see a coverage report, run

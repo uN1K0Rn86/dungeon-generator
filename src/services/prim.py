@@ -45,7 +45,7 @@ class Prim:
         """
         Method that forms a minimum spanning tree from sets of edges and vertices.
         """
-        if not self.vertices:
+        if not self.vertices: # pragma: no cover
             return
 
         vertex: Tuple[int, int] = next(iter(self.vertices)) # Arbitrarily choose a starting vertex
